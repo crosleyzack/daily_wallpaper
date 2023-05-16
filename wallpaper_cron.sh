@@ -8,10 +8,12 @@ MIN=00
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 echo "wallpaper_cron SCRIPT_DIR = $SCRIPT_DIR"
 logger "wallpaper_cron SCRIPT_DIR = $SCRIPT_DIR"
-EXE="$SCRIPT_DIR/set_wallpaper.sh"
+CREATE_EXE="$SCRIPT_DIR/create_wallpaper.sh"
+SET_EXE="$SCRIPT_DIR/set_wallpaper.sh"
 
 # Set new wallpaper since this is run on startup.
-bash $EXE "$SCRIPT_DIR"
+bash $CREATE_EXE "$SCRIPT_DIR" "wallpaper.png"
+bash $SET_EXE "$SCRIPT_DIR" "wallpaper.png"
 
 # Add new cronjob if doesn't already exist
 # sh crontab -e

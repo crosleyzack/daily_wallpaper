@@ -1,0 +1,4 @@
+24 12 * * * /home/crosley/dev/random_desktop_quote/set_wallpaper.sh /home/crosley/dev/random_desktop_quote
+32 12 * * * /home/crosley/dev/random_desktop_quote/set_wallpaper.sh /home/crosley/dev/random_desktop_quote
+24 12 * * * /home/crosley/dev/random_desktop_quote/set_wallpaper.sh /home/crosley/dev/random_desktop_quote
+32 12 * * * /home/crosley/dev/random_desktop_quote/set_wallpaper.sh /home/crosley/dev/random_desktop_quote
