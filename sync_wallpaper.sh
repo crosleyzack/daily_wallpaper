@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Sync repository.
+# TODO this is untested!
+# TODO this probably requires some token to bypass yubikey
 
 # Ensure a base directory was provided.
 if [ -z "$1" ]

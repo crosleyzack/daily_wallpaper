@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# Sync repository.
+# This is the main server application!
+# Can be configured to:
+#   1. Create new new wallpapers
+#   2. Updated wallpaper in repository
+#   3. Set desktop wallpaper
+# Or any subset of those three.
 
 # Ensure a base directory was provided.
 if [ -z "$1" ]
@@ -14,7 +19,9 @@ then
     echo "sync_wallpaper.sh \$2 must be the wallpaper file"
     exit 1
 fi
-WALLPAPER="$REPO_DIR/$2"
+WALLPAPER_NAME="$2"
+WALLPAPER="$REPO_DIR/$WALLPAPER_NAME"
+echo "server.sh REPO_DIR=$REPO_DIR, Wallpaper=$WALLPAPER"
 
 # https://askubuntu.com/questions/742870/background-not-changing-using-gsettings-from-cron
 REAL_UID=$(id --real --user)
@@ -24,7 +31,7 @@ logger "set_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_
 
 if [ $CREATE == "true" ]
 then
-    bash "$REPO_DIR/create_wallpaper.sh" "$REPO_DIR" "$WALLPAPER"
+    bash "$REPO_DIR/create_wallpaper.sh" "$REPO_DIR" "$WALLPAPER_NAME"
     echo "Created new wallpaper"
 fi
 
@@ -37,6 +44,6 @@ fi
 # Set last so we can sync or create to get wallpapers.
 if [ $SET == "true" ]
 then
-    bash "$REPO_DIR/set_wallpaper.sh" "$REPO_DIR/$WALLPAPER"
+    bash "$REPO_DIR/set_wallpaper.sh" "$WALLPAPER"
     echo "Set new wallpaper"
 fi
