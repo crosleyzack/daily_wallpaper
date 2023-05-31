@@ -8,6 +8,8 @@ FONT_SIZE=85
 WALLPAPER_NAME="desktop.png"
 MOBILE_NAME="mobile.png"
 MOBILE_WORDS_PER_LINE=6
+QUOTE_FILE="quotes.csv"
+DELIMITER=";"
 
 # Ensure a base directory was provided.
 if [ -z "$1" ]
@@ -37,16 +39,24 @@ WALLPAPER="$BASE_DIR/$WALLPAPER_NAME"
 MOBILE="$BASE_DIR/$MOBILE_NAME"
 
 # Get text and base image
-TEXT=$(shuf -n 1 $BASE_DIR/quotes.txt)
-FILES=( $BASE_DIR/wallpapers/* )
-logger "create_wallpaper.sh Files = $FILES, TEXT = $TEXT"
-RANDOM_FILE=$(printf "%s\n" "${FILES[RANDOM % ${#FILES[@]}]}")
+TEXT=$( tail -n +2 $BASE_DIR/$QUOTE_FILE | shuf -n 1 )
+AUTHOR=$(echo $TEXT | cut -d $DELIMITER -f 1)
+FILE_REGEX=$(echo $TEXT | cut -d $DELIMITER -f 2)
+QUOTE=$(echo $TEXT | cut -d $DELIMITER -f 3)
+logger "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX'"
+echo "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX'"
+# FILES=( $BASE_DIR/wallpapers/* )
+RANDOM_FILE=$( find $BASE_DIR/wallpapers/* -regex ".*$FILE_REGEX.*" | shuf -n 1)
+# logger "create_wallpaper.sh File = $RANDOM_FILE, TEXT = $TEXT"
+# RANDOM_FILE=$(printf "%s\n" "${FILES[RANDOM % ${#FILES[@]}]}")
+# RANDOM_FILE=${FILES[ $RANDOM % ${#FILES[@]} ]}
 
 # Create desktop wallpaper
 logger "create_wallpaper.sh Generating wallpaper $RANDOM_FILE with text $TEXT"
-echo "create_wallpaper.sh Generating wallpaper = $RANDOM_FILE, TEXT = $TEXT"
+echo "create_wallpaper.sh Generating wallpaper = $RANDOM_FILE, quote = $QUOTE, author = $AUTHOR"
 rm -f $WALLPAPER
-DESKTOP_TEXT=$(echo $TEXT | xargs -n $WORDS_PER_LINE)
+DESKTOP_TEXT=$(echo $QUOTE | xargs -n $WORDS_PER_LINE)
+DESKTOP_TEXT="$DESKTOP_TEXT\n$AUTHOR"
 convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill white -gravity North -annotate +0+100 "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
 
 # Create mobile wallpaper
