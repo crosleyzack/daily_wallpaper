@@ -55,7 +55,8 @@ RANDOM_FILE=$( find $BASE_DIR/wallpapers/* -regex ".*$FILE_REGEX.*" | shuf -n 1)
 logger "create_wallpaper.sh Generating wallpaper $RANDOM_FILE with text $TEXT"
 echo "create_wallpaper.sh Generating wallpaper = $RANDOM_FILE, quote = $QUOTE, author = $AUTHOR"
 rm -f $WALLPAPER
-DESKTOP_TEXT=$(echo $QUOTE | xargs -n $WORDS_PER_LINE)
+# We have to explicitly set the delimiter so xargs will ignore single quotes and other reserved chars in string.
+DESKTOP_TEXT=$(echo $QUOTE | xargs -n $WORDS_PER_LINE -d ' ')
 DESKTOP_TEXT="$DESKTOP_TEXT\n$AUTHOR"
 convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill white -gravity North -annotate +0+100 "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
 
