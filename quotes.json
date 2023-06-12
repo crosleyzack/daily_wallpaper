@@ -657,6 +657,7 @@
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "wordsPerLine": 8,
     "quote": "You will not be punished for your anger, you will be punished by your anger"
   },
   {
@@ -667,6 +668,7 @@
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "wordsPerLine": 13,
     "quote": "Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else, you are the one who gets burned"
   },
   {
@@ -692,31 +694,37 @@
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "wordsPerLine": 12,
     "quote": "Happiness is not something ready made. It comes from your own actions"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "wordsPerLine": 9,
     "quote": "We can never obtain peace in the outer world until we make peace with ourselves"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "wordsPerLine": 8,
     "quote": "Remember that sometimes not getting what you want is a wonderful stroke of luck"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "wordsPerLine": 9,
     "quote": "If you want others to be happy, practice compassion. If you want to be happy, practice compassion"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "wordsPerLine": 9,
     "quote": "A truly compassionate attitude toward others does not change even if they behave negatively or hurt you"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "wordsPerLine": 10,
     "quote": "No matter what sort of difficulties, how painful experience is, if we lose our hope, that's our real disaster"
   },
   {
@@ -752,11 +760,13 @@
   {
     "author": "Iroh",
     "fileRegex": "iroh",
+    "wordsPerLine": 9,
     "quote": "Sometimes the best way to solve your own problems is to help someone else"
   },
   {
     "author": "Iroh",
     "fileRegex": "iroh",
+    "wordsPerLine": 10,
     "quote": "Pride is not the opposite of shame, but it's source. True humility is the only antidote to shame"
   },
   {
@@ -767,6 +777,7 @@
   {
     "author": "Iroh",
     "fileRegex": "iroh",
+    "wordsPerLine": 10,
     "quote": "In the darkest times, hope is something you give yourself. That is the meaning of inner strength"
   },
   {
