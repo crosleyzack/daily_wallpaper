@@ -6,7 +6,7 @@
 DEFAULT_WORDS_PER_LINE=11
 DEFAULT_FONT_SIZE=85
 DEFAULT_WALLPAPER_NAME="wallpaper.png"
-DEFAULT_FILE_REGEX="\"\""
+DEFAULT_FILE_REGEX='""'
 DEFAULT_FONT_COLOR='"white"'
 DEFAULT_GRAVITY='"North"'
 WALLPAPER_NAME="desktop.png"
@@ -55,13 +55,13 @@ MOBILE="$BASE_DIR/$MOBILE_NAME"
 # Work on swapping to json
 FILE_TEXT=$(<$QUOTE_FILE)
 THIS_JSON=$( echo $FILE_TEXT | jq -c '.[]' | shuf -n 1 )
-WORDS_PER_LINE=$( jq ".wordsPerLine // $DEFAULT_WORDS_PER_LINE" <<< "$THIS_JSON" | tr -d '"' )
-FILE_REGEX=$( jq ".fileRegex // $DEFAULT_FILE_REGEX" <<< "$THIS_JSON" | tr -d '"' )
-FONT_SIZE=$( jq ".fontSize // $DEFAULT_FONT_SIZE" <<< "$THIS_JSON" | tr -d '"' )
-GRAVITY=$( jq ".gravity // $DEFAULT_GRAVITY" <<< "$THIS_JSON" | tr -d '"' )
-FONT_COLOR=$( jq ".fontColor // $DEFAULT_FONT_COLOR" <<< "$THIS_JSON" | tr -d '"' )
-QUOTE=$( jq ".quote" <<< "$THIS_JSON" | tr -d '"' )
-AUTHOR=$( jq ".author" <<< "$THIS_JSON" | tr -d '"' )
+WORDS_PER_LINE=$( jq ".$WORDS_PER_LINE_KEY // $DEFAULT_WORDS_PER_LINE" <<< "$THIS_JSON" | tr -d '"' )
+FILE_REGEX=$( jq ".$REGEX_KEY // $DEFAULT_FILE_REGEX" <<< "$THIS_JSON" | tr -d '"' )
+FONT_SIZE=$( jq ".$SIZE_KEY // $DEFAULT_FONT_SIZE" <<< "$THIS_JSON" | tr -d '"' )
+GRAVITY=$( jq ".$GRAVITY_KEY // $DEFAULT_GRAVITY" <<< "$THIS_JSON" | tr -d '"' )
+FONT_COLOR=$( jq ".$COLOR_KEY // $DEFAULT_FONT_COLOR" <<< "$THIS_JSON" | tr -d '"' )
+QUOTE=$( jq ".$QUOTE_KEY" <<< "$THIS_JSON" | tr -d '"' )
+AUTHOR=$( jq ".$AUTHOR_KEY" <<< "$THIS_JSON" | tr -d '"' )
 logger "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX', FONT_SIZE='$FONT_SIZE', WORDS_PER_LINE='$WORDS_PER_LINE', GRAVITY='$GRAVITY', FONT_COLOR='$FONT_COLOR'"
 echo "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX', FONT_SIZE='$FONT_SIZE', WORDS_PER_LINE='$WORDS_PER_LINE', GRAVITY='$GRAVITY', FONT_COLOR='$FONT_COLOR'"
 

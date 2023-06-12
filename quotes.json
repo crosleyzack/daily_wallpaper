@@ -772,6 +772,8 @@
   {
     "author": "Iroh",
     "fileRegex": "iroh",
+    "wordsPerLine": 12,
+    "fontSize": 90,
     "quote": "Sometimes life is like this dark tunnel. You can't always see the light at the end of the tunnel, but if you just keep moving, you will come to a better place"
   }
 ]
