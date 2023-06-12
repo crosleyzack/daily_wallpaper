@@ -2,14 +2,27 @@
 
 # Generate new wallpaper
 
-# Set number of words per line (indicated by space boundaries).
-WORDS_PER_LINE=11
-FONT_SIZE=85
+# Set constants.
+DEFAULT_WORDS_PER_LINE=11
+DEFAULT_FONT_SIZE=85
+DEFAULT_WALLPAPER_NAME="wallpaper.png"
+DEFAULT_FILE_REGEX="\"\""
+DEFAULT_FONT_COLOR='"white"'
+DEFAULT_GRAVITY='"North"'
 WALLPAPER_NAME="desktop.png"
 MOBILE_NAME="mobile.png"
 MOBILE_WORDS_PER_LINE=6
-QUOTE_FILE="quotes.csv"
-DELIMITER=";"
+QUOTE_FILE="quotes.json"
+WALLPAPER_DIR_NAME="wallpapers"
+
+# Set JSON Keys. NOTE: for some reason, `_` in keys creates some issues
+SIZE_KEY="fontSize"
+WORDS_PER_LINE_KEY="wordsPerLine"
+REGEX_KEY="fileRegex"
+COLOR_KEY="fontColor"
+GRAVITY_KEY="gravity"
+QUOTE_KEY="quote"
+AUTHOR_KEY="author"
 
 # Ensure a base directory was provided.
 if [ -z "$1" ]
@@ -21,12 +34,11 @@ BASE_DIR=$(realpath $1)
 if [ -z "$2" ]
 then
     # We will assume wallpaper name if not provided
-    WALLPAPER_NAME="wallpaper.png"
+    WALLPAPER_NAME="$DEFAULT_WALLPAPER_NAME"
 else
     WALLPAPER_NAME="$2"
 fi
 logger "create_wallpaper.sh base_dir = $BASE_DIR, wallpaper_name = $WALLPAPER_NAME"
-# SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # https://askubuntu.com/questions/742870/background-not-changing-using-gsettings-from-cron
 REAL_UID=$(id --real --user)
@@ -34,31 +46,35 @@ PID=$(pgrep --euid $REAL_UID gnome-session | head -n 1)
 export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2- | sed -e "s/\x0//g")
 logger "create_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
 
-# Set path to wallpaper file.
+# Set path to wallpaper files
+QUOTE_FILE="$BASE_DIR/$QUOTE_FILE"
+WALLPAPERS_DIR="$BASE_DIR/$WALLPAPER_DIR_NAME"
 WALLPAPER="$BASE_DIR/$WALLPAPER_NAME"
 MOBILE="$BASE_DIR/$MOBILE_NAME"
 
-# Get text and base image
-TEXT=$( tail -n +2 $BASE_DIR/$QUOTE_FILE | shuf -n 1 )
-AUTHOR=$(echo $TEXT | cut -d $DELIMITER -f 1)
-FILE_REGEX=$(echo $TEXT | cut -d $DELIMITER -f 2)
-QUOTE=$(echo $TEXT | cut -d $DELIMITER -f 3)
-logger "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX'"
-echo "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX'"
-# FILES=( $BASE_DIR/wallpapers/* )
-RANDOM_FILE=$( find $BASE_DIR/wallpapers/* -regex ".*$FILE_REGEX.*" | shuf -n 1)
-# logger "create_wallpaper.sh File = $RANDOM_FILE, TEXT = $TEXT"
-# RANDOM_FILE=$(printf "%s\n" "${FILES[RANDOM % ${#FILES[@]}]}")
-# RANDOM_FILE=${FILES[ $RANDOM % ${#FILES[@]} ]}
+# Work on swapping to json
+FILE_TEXT=$(<$QUOTE_FILE)
+THIS_JSON=$( echo $FILE_TEXT | jq -c '.[]' | shuf -n 1 )
+WORDS_PER_LINE=$( jq ".wordsPerLine // $DEFAULT_WORDS_PER_LINE" <<< "$THIS_JSON" | tr -d '"' )
+FILE_REGEX=$( jq ".fileRegex // $DEFAULT_FILE_REGEX" <<< "$THIS_JSON" | tr -d '"' )
+FONT_SIZE=$( jq ".fontSize // $DEFAULT_FONT_SIZE" <<< "$THIS_JSON" | tr -d '"' )
+GRAVITY=$( jq ".gravity // $DEFAULT_GRAVITY" <<< "$THIS_JSON" | tr -d '"' )
+FONT_COLOR=$( jq ".fontColor // $DEFAULT_FONT_COLOR" <<< "$THIS_JSON" | tr -d '"' )
+QUOTE=$( jq ".quote" <<< "$THIS_JSON" | tr -d '"' )
+AUTHOR=$( jq ".author" <<< "$THIS_JSON" | tr -d '"' )
+logger "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX', FONT_SIZE='$FONT_SIZE', WORDS_PER_LINE='$WORDS_PER_LINE', GRAVITY='$GRAVITY', FONT_COLOR='$FONT_COLOR'"
+echo "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX', FONT_SIZE='$FONT_SIZE', WORDS_PER_LINE='$WORDS_PER_LINE', GRAVITY='$GRAVITY', FONT_COLOR='$FONT_COLOR'"
+
+# Select random file from regex provided.
+RANDOM_FILE=$( find $WALLPAPERS_DIR/* -regex ".*$FILE_REGEX.*" | shuf -n 1 )
 
 # Create desktop wallpaper
-logger "create_wallpaper.sh Generating wallpaper $RANDOM_FILE with text $TEXT"
+logger "create_wallpaper.sh Generating wallpaper $RANDOM_FILE, quote = $QUOTE, author = $AUTHOR"
 echo "create_wallpaper.sh Generating wallpaper = $RANDOM_FILE, quote = $QUOTE, author = $AUTHOR"
-rm -f $WALLPAPER
 # We have to explicitly set the delimiter so xargs will ignore single quotes and other reserved chars in string.
 DESKTOP_TEXT=$(echo $QUOTE | xargs -n $WORDS_PER_LINE -d ' ')
 DESKTOP_TEXT="$DESKTOP_TEXT\n$AUTHOR"
-convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill white -gravity North -annotate +0+100 "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
+convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill "$FONT_COLOR" -gravity "$GRAVITY" -annotate +0+100 "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
 
 # Create mobile wallpaper
 # MOBILE_TEXT=$(echo $TEXT | xargs -n $MOBILE_WORDS_PER_LINE)
