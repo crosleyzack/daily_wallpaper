@@ -9,6 +9,7 @@ DEFAULT_WALLPAPER_NAME="wallpaper.png"
 DEFAULT_FILE_REGEX='""'
 DEFAULT_FONT_COLOR='"white"'
 DEFAULT_GRAVITY='"North"'
+DEFAULT_ANNOTATE='"+0+120"'
 WALLPAPER_NAME="desktop.png"
 MOBILE_NAME="mobile.png"
 MOBILE_WORDS_PER_LINE=6
@@ -21,6 +22,7 @@ WORDS_PER_LINE_KEY="wordsPerLine"
 REGEX_KEY="fileRegex"
 COLOR_KEY="fontColor"
 GRAVITY_KEY="gravity"
+ANNOTATE_KEY="annotate"
 QUOTE_KEY="quote"
 AUTHOR_KEY="author"
 
@@ -60,21 +62,20 @@ FILE_REGEX=$( jq ".$REGEX_KEY // $DEFAULT_FILE_REGEX" <<< "$THIS_JSON" | tr -d '
 FONT_SIZE=$( jq ".$SIZE_KEY // $DEFAULT_FONT_SIZE" <<< "$THIS_JSON" | tr -d '"' )
 GRAVITY=$( jq ".$GRAVITY_KEY // $DEFAULT_GRAVITY" <<< "$THIS_JSON" | tr -d '"' )
 FONT_COLOR=$( jq ".$COLOR_KEY // $DEFAULT_FONT_COLOR" <<< "$THIS_JSON" | tr -d '"' )
+ANNOTATE_LOC=$( jq ".$ANNOTATE_KEY // $DEFAULT_ANNOTATE" <<< "$THIS_JSON" | tr -d '"' )
 QUOTE=$( jq ".$QUOTE_KEY" <<< "$THIS_JSON" | tr -d '"' )
 AUTHOR=$( jq ".$AUTHOR_KEY" <<< "$THIS_JSON" | tr -d '"' )
-logger "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX', FONT_SIZE='$FONT_SIZE', WORDS_PER_LINE='$WORDS_PER_LINE', GRAVITY='$GRAVITY', FONT_COLOR='$FONT_COLOR'"
-echo "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX', FONT_SIZE='$FONT_SIZE', WORDS_PER_LINE='$WORDS_PER_LINE', GRAVITY='$GRAVITY', FONT_COLOR='$FONT_COLOR'"
+logger "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX', FONT_SIZE='$FONT_SIZE', WORDS_PER_LINE='$WORDS_PER_LINE', GRAVITY='$GRAVITY', FONT_COLOR='$FONT_COLOR', ANNOTATE='$ANNOTATE_LOC'"
+echo "create_wallpaper.sh read quotes line QUOTE='$QUOTE', AUTHOR='$AUTHOR', REGEX='$FILE_REGEX', FONT_SIZE='$FONT_SIZE', WORDS_PER_LINE='$WORDS_PER_LINE', GRAVITY='$GRAVITY', FONT_COLOR='$FONT_COLOR', ANNOTATE='$ANNOTATE_LOC'"
 
 # Select random file from regex provided.
 RANDOM_FILE=$( find $WALLPAPERS_DIR/* -regex ".*$FILE_REGEX.*" | shuf -n 1 )
 
 # Create desktop wallpaper
-logger "create_wallpaper.sh Generating wallpaper $RANDOM_FILE, quote = $QUOTE, author = $AUTHOR"
-echo "create_wallpaper.sh Generating wallpaper = $RANDOM_FILE, quote = $QUOTE, author = $AUTHOR"
 # We have to explicitly set the delimiter so xargs will ignore single quotes and other reserved chars in string.
 DESKTOP_TEXT=$(echo $QUOTE | xargs -n $WORDS_PER_LINE -d ' ')
 DESKTOP_TEXT="$DESKTOP_TEXT\n$AUTHOR"
-convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill "$FONT_COLOR" -gravity "$GRAVITY" -annotate +0+100 "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
+convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill "$FONT_COLOR" -gravity "$GRAVITY" -annotate $ANNOTATE_LOC "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
 
 # Create mobile wallpaper
 # MOBILE_TEXT=$(echo $TEXT | xargs -n $MOBILE_WORDS_PER_LINE)
