@@ -224,6 +224,7 @@
     "fileRegex": "landscape",
     "quote": "While we are postponing, life speeds by."
   },
+
   {
     "author": "Seneca",
     "fileRegex": "landscape",
@@ -243,6 +244,11 @@
     "author": "Seneca",
     "fileRegex": "landscape",
     "quote": "To wish to be well is a part of becoming well."
+  },
+  {
+    "author": "Seneca",
+    "fileRegex": "landscape",
+    "quote": "Bestow pardon for many things; seek pardon for none."
   },
   {
     "author": "Seneca",
@@ -637,149 +643,232 @@
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "Peace comes from within.  Do not seek it without"
   },
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "If you truly loved yourself, you could never hurt another"
   },
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "Every morning we are born again. What we do today is what matters most"
   },
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "wordsPerLine": 8,
     "quote": "You will not be punished for your anger, you will be punished by your anger"
   },
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "No one saves us but ourselves. No one can and no one may. We ourselves must walk the path"
   },
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "wordsPerLine": 13,
     "quote": "Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else, you are the one who gets burned"
   },
   {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "If you cling to your wealth, it is better to throw it away than to let it poison your heart. But if you don’t cling to it but use it wisely, then you will be a blessing to people. It’s not wealth and power that enslave people, but the clinging to wealth and power"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "Love is the absence of judgment"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "Know the rules well, so you can break them effectively"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "Judge your success by what you had to give up in order to get it"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
     "wordsPerLine": 12,
+    "fontSize": 110,
     "quote": "Happiness is not something ready made. It comes from your own actions"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
     "wordsPerLine": 9,
+    "fontSize": 110,
     "quote": "We can never obtain peace in the outer world until we make peace with ourselves"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
     "wordsPerLine": 8,
+    "fontSize": 110,
     "quote": "Remember that sometimes not getting what you want is a wonderful stroke of luck"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
     "wordsPerLine": 9,
+    "fontSize": 110,
     "quote": "If you want others to be happy, practice compassion. If you want to be happy, practice compassion"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
     "wordsPerLine": 9,
+    "fontSize": 110,
     "quote": "A truly compassionate attitude toward others does not change even if they behave negatively or hurt you"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
     "wordsPerLine": 10,
+    "fontSize": 110,
     "quote": "No matter what sort of difficulties, how painful experience is, if we lose our hope, that's our real disaster"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "Remember that the best relationship is one in which your love for each other exceeds your need for each other"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "Only the development of compassion and understanding for others can bring us the tranquility and happiness we all seek"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "All suffering is caused by ignorance. People inflict pain on others in the selfish pursuit of their own happiness or satisfaction"
   },
   {
     "author": "Dalai Lama XIV",
     "fileRegex": "buddha",
+    "fontSize": 110,
     "quote": "People take different roads seeking fulfillment and happiness. Just because they’re not on your road doesn’t mean they’ve gotten lost"
   },
   {
     "author": "Iroh",
     "fileRegex": "iroh",
+    "fontSize": 150,
     "quote": "Life happens wherever you are, whether you make it or not"
   },
   {
     "author": "Iroh",
     "fileRegex": "iroh",
+    "fontSize": 150,
+    "quote": "There is nothing wrong with a life of peace and prosperity"
+  },
+  {
+    "author": "Iroh",
+    "fileRegex": "iroh",
+    "fontSize": 150,
+    "quote": "Sharing tea with a fascinating stranger is one of life's true delights."
+  }, 
+  {
+    "author": "Iroh",
+    "fileRegex": "iroh",
+    "fontSize": 150,
+    "quote": "The best tea tastes delicious whether it comes in a porcelain pot or a tin cup."
+  }, 
+  {
+    "author": "Iroh",
+    "fileRegex": "iroh",
+    "fontSize": 150,
     "quote": "Good times become good memories, but bad times become good lessons"
   },
   {
     "author": "Iroh",
     "fileRegex": "iroh",
     "wordsPerLine": 9,
+    "fontSize": 150,
     "quote": "Sometimes the best way to solve your own problems is to help someone else"
   },
   {
     "author": "Iroh",
     "fileRegex": "iroh",
     "wordsPerLine": 10,
+    "fontSize": 150,
     "quote": "Pride is not the opposite of shame, but it's source. True humility is the only antidote to shame"
   },
   {
     "author": "Iroh",
     "fileRegex": "iroh",
+    "fontSize": 150,
     "quote": "You will find that if you look for the light, you can often find it, but if you look for the dark, that is all you will ever see"
   },
   {
     "author": "Iroh",
     "fileRegex": "iroh",
     "wordsPerLine": 10,
+    "fontSize": 150,
     "quote": "In the darkest times, hope is something you give yourself. That is the meaning of inner strength"
   },
   {
     "author": "Iroh",
     "fileRegex": "iroh",
     "wordsPerLine": 12,
-    "fontSize": 90,
+    "fontSize": 150,
     "quote": "Sometimes life is like this dark tunnel. You can't always see the light at the end of the tunnel, but if you just keep moving, you will come to a better place"
+  },
+  {
+    "author": "Guru Pathik",
+    "fileRegex": "iroh",
+    "wordsPerLine": 18,
+    "fontSize": 140,
+    "quote": "The greatest illusion of this world is the illusion of separation. Things you think are separate and different are actually one and the same… We are all one people, but we live as if divided."
+  },
+  {
+    "author": "Queen Galadriel",
+    "fileRegex": "landscape",
+    "quote": "Even the smallest person can change the course of the future."
+  },
+  {
+    "author": "Gandalf",
+    "fileRegex": "landscape",
+    "wordsPerLine": 13,
+    "quote": "Many that live deserve death. Some that die deserve life. Can you give it to them, Frodo? Do not be too eager to deal out death in judgment. Even the very wise cannot see all ends."
+  },
+  {
+    "author": "Gandalf",
+    "fileRegex": "landscape",
+    "quote": "Despair is only for those who see the end beyond all doubt. We do not."
+  },
+  {
+    "author": "Gandalf",
+    "fileRegex": "landscape",
+    "quote": "All we have to decide is what to do with the time that is given us."
+  },
+  {
+    "author": "Aragorn",
+    "fileRegex": "landscape",
+    "quote": "Deeds will not be less valiant because they are unpraised."
+  },
+  {
+    "author": "Winnifred Wygal",
+    "fileRegex": "landscape",
+    "wordsPerLine": 14,
+    "quote": "Father, give us courage to change what must be altered, serenity to accept what cannot be helped, and the insight to know the one from the other."
   }
 ]
