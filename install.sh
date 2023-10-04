@@ -24,7 +24,7 @@ echo "[Desktop Entry]
 Type=Application
 Name=WallpaperScript
 Exec=$DIR_PATH/wallpaper_cron.sh
-OnlyShowIn=GNOME;" >> $WALLPAPER_FILE
+OnlyShowIn=GNOME;" > $WALLPAPER_FILE
 
 # Set for gnome to run at startup
 mkdir -p $HOME/.config/autostart
