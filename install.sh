@@ -14,3 +14,20 @@ find wallpapers -type f -exec chmod 666 {} \;
 # Dumb permissions stuff
 sudo chown $USER:$USER ~/.config/dconf -R
 chmod u+w ~/.config/dconf -R
+
+# make desktop startup file
+FILE_PATH=$(realpath $BASH_SOURCE)
+DIR_PATH=$(dirname $FILE_PATH)
+WALLPAPER_FILE="$DIR_PATH/wallpaper.desktop"
+rm -f $WALLPAPER_FILE
+echo "[Desktop Entry]
+Type=Application
+Name=WallpaperScript
+Exec=$DIR_PATH/wallpaper_cron.sh
+OnlyShowIn=GNOME;" >> $WALLPAPER_FILE
+
+# Set for gnome to run at startup
+mkdir -p $HOME/.config/autostart
+rm -f $HOME/.config/autostart/wallpaper.desktop
+ln -s $WALLPAPER_FILE $HOME/.config/autostart/wallpaper.desktop
+
