@@ -8,6 +8,7 @@ DEFAULT_FONT_SIZE=85
 DEFAULT_WALLPAPER_NAME="wallpaper.png"
 DEFAULT_FILE_REGEX='""'
 DEFAULT_FONT_COLOR='"white"'
+DEFAULT_FONT='Source-Code-Pro'
 DEFAULT_GRAVITY='"North"'
 DEFAULT_ANNOTATE='"+0+120"'
 WALLPAPER_NAME="desktop.png"
@@ -20,6 +21,7 @@ WALLPAPER_DIR_NAME="wallpapers"
 SIZE_KEY="fontSize"
 WORDS_PER_LINE_KEY="wordsPerLine"
 REGEX_KEY="fileRegex"
+FONT_KEY="font"
 COLOR_KEY="fontColor"
 GRAVITY_KEY="gravity"
 ANNOTATE_KEY="annotate"
@@ -75,7 +77,7 @@ RANDOM_FILE=$( find $WALLPAPERS_DIR/* -regex ".*$FILE_REGEX.*" | shuf -n 1 )
 # We have to explicitly set the delimiter so xargs will ignore single quotes and other reserved chars in string.
 DESKTOP_TEXT=$(echo $QUOTE | xargs -n $WORDS_PER_LINE -d ' ')
 DESKTOP_TEXT="$DESKTOP_TEXT\n$AUTHOR"
-convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill "$FONT_COLOR" -gravity "$GRAVITY" -annotate $ANNOTATE_LOC "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
+convert "$RANDOM_FILE" -font "$DEFAULT_FONT" -pointsize "$FONT_SIZE" -fill "$FONT_COLOR" -gravity "$GRAVITY" -annotate $ANNOTATE_LOC "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
 
 # Create mobile wallpaper
 # MOBILE_TEXT=$(echo $TEXT | xargs -n $MOBILE_WORDS_PER_LINE)
