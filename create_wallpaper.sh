@@ -8,7 +8,7 @@ DEFAULT_FONT_SIZE=85
 DEFAULT_WALLPAPER_NAME="wallpaper.png"
 DEFAULT_FILE_REGEX='""'
 DEFAULT_FONT_COLOR='"white"'
-DEFAULT_FONT='Source-Code-Pro'
+DEFAULT_FONT='"Source-Code-Pro"'
 DEFAULT_GRAVITY='"North"'
 DEFAULT_ANNOTATE='"+0+120"'
 WALLPAPER_NAME="desktop.png"
@@ -62,6 +62,7 @@ THIS_JSON=$( echo $FILE_TEXT | jq -c '.[]' | shuf -n 1 )
 WORDS_PER_LINE=$( jq ".$WORDS_PER_LINE_KEY // $DEFAULT_WORDS_PER_LINE" <<< "$THIS_JSON" | tr -d '"' )
 FILE_REGEX=$( jq ".$REGEX_KEY // $DEFAULT_FILE_REGEX" <<< "$THIS_JSON" | tr -d '"' )
 FONT_SIZE=$( jq ".$SIZE_KEY // $DEFAULT_FONT_SIZE" <<< "$THIS_JSON" | tr -d '"' )
+FONT_NAME=$( jq ".$FONT_KEY // $DEFAULT_FONT" <<< "$THIS_JSON" | tr -d '"' )
 GRAVITY=$( jq ".$GRAVITY_KEY // $DEFAULT_GRAVITY" <<< "$THIS_JSON" | tr -d '"' )
 FONT_COLOR=$( jq ".$COLOR_KEY // $DEFAULT_FONT_COLOR" <<< "$THIS_JSON" | tr -d '"' )
 ANNOTATE_LOC=$( jq ".$ANNOTATE_KEY // $DEFAULT_ANNOTATE" <<< "$THIS_JSON" | tr -d '"' )
@@ -77,7 +78,7 @@ RANDOM_FILE=$( find $WALLPAPERS_DIR/* -regex ".*$FILE_REGEX.*" | shuf -n 1 )
 # We have to explicitly set the delimiter so xargs will ignore single quotes and other reserved chars in string.
 DESKTOP_TEXT=$(echo $QUOTE | xargs -n $WORDS_PER_LINE -d ' ')
 DESKTOP_TEXT="$DESKTOP_TEXT\n$AUTHOR"
-convert "$RANDOM_FILE" -font "$DEFAULT_FONT" -pointsize "$FONT_SIZE" -fill "$FONT_COLOR" -gravity "$GRAVITY" -annotate $ANNOTATE_LOC "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
+convert "$RANDOM_FILE" -font $FONT_NAME -pointsize "$FONT_SIZE" -fill "$FONT_COLOR" -gravity "$GRAVITY" -annotate $ANNOTATE_LOC "$DESKTOP_TEXT" -quality 100 "$WALLPAPER"
 
 # Create mobile wallpaper
 # MOBILE_TEXT=$(echo $TEXT | xargs -n $MOBILE_WORDS_PER_LINE)
