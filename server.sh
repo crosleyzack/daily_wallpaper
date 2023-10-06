@@ -29,20 +29,20 @@ PID=$(pgrep --euid $REAL_UID gnome-session | head -n 1)
 export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2- | sed -e "s/\x0//g")
 logger "set_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
 
-if [ $CREATE == "true" ]
+if [ "$CREATE" == "true" ]
 then
     bash "$REPO_DIR/create_wallpaper.sh" "$REPO_DIR" "$WALLPAPER_NAME"
     echo "Created new wallpaper"
 fi
 
-if [ $SYNC == "true" ]
+if [ "$SYNC" == "true" ]
 then
     bash "$REPO_DIR/sync_wallpaper.sh" "$REPO_DIR" "$WALLPAPER"
     echo "synced wallpaper project"
 fi
 
 # Set last so we can sync or create to get wallpapers.
-if [ $SET == "true" ]
+if [ "$SET" == "true" ]
 then
     bash "$REPO_DIR/set_wallpaper.sh" "$WALLPAPER"
     echo "Set new wallpaper"
