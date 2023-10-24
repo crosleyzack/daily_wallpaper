@@ -7,6 +7,52 @@ Put desired base wallpapers in `wallpapers` directory and quotes in individual l
 
 Run `wallpaper_cron.sh` on startup.
 
+# Quotes Fromata
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "quote": {
+      "type": "string",
+      "description": "Specifies the quote to print",
+    },
+    "author": {
+      "type": "string",
+      "description": "Specifies the author for the quote",
+    },
+    "fileRegex": {
+      "type": "string",
+      "description": "Defines the regex to filter wallpapers to select from",
+    },
+    "wordsPerLine": {
+      "type": "int",
+      "description": "Defines the number of words to be printed per line on the wallpaper",
+    },
+    "fontSize": {
+      "type": "int",
+      "description": "Defines the font size to be printed on the wallpaper",
+    },
+    "font": {
+      "type": "string",
+      "description": "Defines the font to print in",
+    },
+    "fontColor": {
+      "type": "string",
+      "description": "Defines the color for the font to be printed in",
+    },
+    "gravity": {
+      "type": "string",
+      "description": "Defines the base location to print text on the wallpaper",
+    },
+    "annotate": {
+      "type": "string",
+      "description": "Defines the location adjustment for font location to be printed",
+    },
+  },
+}
+```
+
 # Credits
 
 ```json
