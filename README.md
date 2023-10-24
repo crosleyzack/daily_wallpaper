@@ -9,6 +9,8 @@ Run `wallpaper_cron.sh` on startup.
 
 # Quotes Schema
 
+Schema to use for quote entries in the `quotes.json` file. All values other than `quote` and `author` have a default and can be ommitted.
+
 ```json
 {
   "type": "object",
