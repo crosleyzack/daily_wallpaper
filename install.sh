@@ -31,7 +31,9 @@ Exec=$DIR_PATH/wallpaper_cron.sh
 OnlyShowIn=GNOME;" > $WALLPAPER_FILE
 
 # Set for gnome to run at startup
-mkdir -p $HOME/.config/autostart
-rm -f $HOME/.config/autostart/wallpaper.desktop
-ln -s $WALLPAPER_FILE $HOME/.config/autostart/wallpaper.desktop
+AUTOSTART_DIR="$HOME/.config/autostart"
+AUTOSTART_FILE="$AUTOSTART_DIR/wallpaper.desktop"
+mkdir -p $AUTOSTART_DIR
+rm -f $AUTOSTART_FILE
+ln -s $WALLPAPER_FILE $AUTOSTART_FILE
 
