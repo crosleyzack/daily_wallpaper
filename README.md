@@ -7,7 +7,7 @@ Put desired base wallpapers in `wallpapers` directory and quotes in individual l
 
 Run `wallpaper_cron.sh` on startup.
 
-# Quotes Fromata
+# Quotes Schema
 
 ```json
 {
