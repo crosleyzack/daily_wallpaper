@@ -1,7 +1,16 @@
 #!/bin/bash
 
-sudo apt install imagemagick
+source "${BASH_SOURCE%/*}/../tools/install_tools.sh"
 
+is_installed convert
+if [ "false" = "$INSTALLED" ]
+then
+    sudo apt install imagemagick
+    # Create sym link, so this is visible to startup
+    sudo ln -s $(which convert) /usr/local/bin/convert
+fi
+
+# Update permissions
 chmod 777 ./set_wallpaper.sh
 chmod 777 ./create_wallpaper.sh
 chmod 777 ./sync_wallpaper.sh
