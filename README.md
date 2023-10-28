@@ -58,7 +58,7 @@ Schema to use for quote entries in the `quotes.json` file. All values other than
 }
 ```
 
-> :warning: Just because a field can be changed doesn't mean it should
+:warning:  Just because a field can be changed doesn't mean it should
 
 # Credits
 
