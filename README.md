@@ -3,13 +3,13 @@ Generates a background on restart which picks and image and quote.
 
 Run `install.sh` to install necessary requirements.
 
-Put desired base wallpapers in `wallpapers` directory and quotes in individual lines of `quotes.txt`.
+Put desired base wallpapers in `wallpapers` directory and quotes in `quotes.json` (schema below).
 
-Run `wallpaper_cron.sh` on startup.
+Run `wallpaper_cron.sh` on startup. `install.sh` places a `.desktop` file in `~/.config/autostart` automatically.
 
 # Quotes Schema
 
-Schema to use for quote entries in the `quotes.json` file. All values other than `quote` and `author` have a default and can be ommitted.
+Schema to use for quote entries in the `quotes.json` file. All values other than `quote` and `author` have a default in `create_wallpaper.sh` and can be ommitted.
 
 ```json
 {
@@ -18,42 +18,47 @@ Schema to use for quote entries in the `quotes.json` file. All values other than
     "quote": {
       "type": "string",
       "description": "Specifies the quote to print",
+      "exclusiveMinimum": 0,
     },
     "author": {
       "type": "string",
       "description": "Specifies the author for the quote",
+      "exclusiveMinimum": 0,
     },
     "fileRegex": {
       "type": "string",
-      "description": "Defines the regex to filter wallpapers to select from",
+      "description": "Defines the regex to filter wallpapers to select from. If unspecified, selects from all",
     },
     "wordsPerLine": {
       "type": "int",
-      "description": "Defines the number of words to be printed per line on the wallpaper",
+      "description": "Defines words printed per line on the wallpaper. If unspecified, uses default",
     },
     "fontSize": {
       "type": "int",
-      "description": "Defines the font size to be printed on the wallpaper",
+      "description": "Defines the font size to be used. If unspecified, uses default",
     },
     "font": {
       "type": "string",
-      "description": "Defines the font to print in",
+      "description": "Defines the font to print in. If unspecified, uses default",
     },
     "fontColor": {
       "type": "string",
-      "description": "Defines the color for the font to be printed in",
+      "description": "Defines the color for the font to be printed in. If unspecified, uses default",
     },
     "gravity": {
       "type": "string",
-      "description": "Defines the base location to print text on the wallpaper",
+      "description": "Defines the base location to print text on the wallpaper. If unspecified, uses default",
     },
     "annotate": {
       "type": "string",
-      "description": "Defines the location adjustment for font location to be printed",
+      "description": "Defines the location adjustment for font location to be printed. If unspecified, uses default",
     },
   },
+  "required": [ "quote", "author" ],
 }
 ```
+
+> :warning: Just because a field can be changed doesn't mean it should
 
 # Credits
 
