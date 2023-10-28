@@ -14,6 +14,7 @@ Schema to use for quote entries in the `quotes.json` file. All values other than
 ```json
 {
   "type": "object",
+  "description": "quotes.json schema",
   "properties": {
     "quote": {
       "type": "string",
