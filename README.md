@@ -5,7 +5,7 @@ Run `install.sh` to install necessary requirements.
 
 Put desired base wallpapers in `wallpapers` directory and quotes in `quotes.json` (schema below).
 
-Run `wallpaper_cron.sh` on startup. `install.sh` places a `.desktop` file in `~/.config/autostart` automatically.
+Run `wallpaper_cron.sh` on startup. `install.sh` places a `.desktop` file in `~/.config/autostart` to execute this file automatically.
 
 # Quotes Schema
 
