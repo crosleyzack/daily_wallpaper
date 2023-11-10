@@ -36,23 +36,24 @@ Schema to use for quote entries in the `quotes.json` file. All values other than
     },
     "fontSize": {
       "type": "int",
-      "description": "Defines the font size to be used. If unspecified, uses default",
+      "description": "Defines the font size to be used. If unspecified, uses default. See https://imagemagick.org/script/command-line-options.php#pointsize",
     },
     "font": {
       "type": "string",
-      "description": "Defines the font to print in. If unspecified, uses default",
+      "description": "Defines the font to print in. If unspecified, uses default. See https://imagemagick.org/script/command-line-options.php#font",
+      
     },
     "fontColor": {
       "type": "string",
-      "description": "Defines the color for the font to be printed in. If unspecified, uses default",
+      "description": "Defines the color for the font to be printed in. If unspecified, uses default. See https://imagemagick.org/script/command-line-options.php#fill",
     },
     "gravity": {
       "type": "string",
-      "description": "Defines the base location to print text on the wallpaper. If unspecified, uses default",
+      "description": "Defines the base location to print text on the wallpaper. If unspecified, uses default (North). See https://imagemagick.org/script/command-line-options.php#gravity",
     },
     "annotate": {
       "type": "string",
-      "description": "Defines the location adjustment for font location to be printed. If unspecified, uses default",
+      "description": "Defines the location adjustment for font location to be printed. If unspecified, uses default. See https://imagemagick.org/script/command-line-options.php#annotate",
     },
   },
   "required": [ "quote", "author" ],
