@@ -1,14 +1,9 @@
 #!/bin/bash
 
-source "${BASH_SOURCE%/*}/../tools/install_tools.sh"
-
-is_installed convert
-if [ "false" = "$INSTALLED" ]
-then
-    sudo apt install imagemagick
-    # Create sym link, so this is visible to startup
-    sudo ln -s $(which convert) /usr/local/bin/convert
-fi
+# TODO use generic install method
+sudo apt install imagemagick
+# Create sym link, so this is visible to startup
+sudo ln -s $(which convert) /usr/local/bin/convert
 
 # Update permissions
 chmod 777 ./set_wallpaper.sh
@@ -40,9 +35,12 @@ Exec=$DIR_PATH/wallpaper_cron.sh
 OnlyShowIn=GNOME;" > $WALLPAPER_FILE
 
 # Set for gnome to run at startup
-AUTOSTART_DIR="$HOME/.config/autostart"
-AUTOSTART_FILE="$AUTOSTART_DIR/wallpaper.desktop"
-mkdir -p $AUTOSTART_DIR
-rm -f $AUTOSTART_FILE
-ln -s $WALLPAPER_FILE $AUTOSTART_FILE
+if [[ -v XDG_CONFIG_HOME ]]; then
+    echo "XDG_CONFIG_HOME defined, creating autostart"
+    AUTOSTART_DIR="$XDG_CONFIG_HOME/autostart"
+    AUTOSTART_FILE="$AUTOSTART_DIR/wallpaper.desktop"
+    mkdir -p $AUTOSTART_DIR
+    rm -f $AUTOSTART_FILE
+    ln -s $WALLPAPER_FILE $AUTOSTART_FILE
+fi
 
