@@ -5,7 +5,9 @@ Run `install.sh` to install necessary requirements.
 
 Put desired base wallpapers in `wallpapers` directory and quotes in `quotes.json` (schema below).
 
-Run `wallpaper_cron.sh` on startup. `install.sh` places a `.desktop` file in `$XDG_CONFIG_HOME/autostart` to execute this file automatically.
+Run `server.sh` on startup. `install.sh` places a `.desktop` file in `$XDG_CONFIG_HOME/autostart` to execute this file automatically.
+
+Execute `wallpaper_cron.sh` to setup a daily cronjob to regenerate desktops, in addition to on startup.
 
 # Quotes Schema
 
