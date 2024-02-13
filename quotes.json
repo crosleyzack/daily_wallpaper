@@ -638,6 +638,7 @@
   {
     "author": "Chrysippus",
     "fileRegex": "landscape",
+    "wordsPerLine": 8,
     "quote": "There could be no justice, unless there were also injustice, no courage, unless there were cowardice, no truth, unless there were falsehood."
   },
   {
@@ -1032,12 +1033,27 @@
   {
     "author": "Caduceus Clay",
     "fileRegex": "landscape",
+    "quote": "Its important not to get angry at people for what they don’t know"
+  },
+  {
+    "author": "Caduceus Clay",
+    "fileRegex": "landscape",
     "quote": "People aren’t good. Things that you do are good, or bad, but people are just people"
   },
   {
     "author": "Caduceus Clay",
     "fileRegex": "landscape",
+    "quote": "That's the trick with faith: if you aren't willing to move forward until you know, then you don't need it"
+  },
+  {
+    "author": "Caduceus Clay",
+    "fileRegex": "landscape",
     "quote": "Eventually, some day, somebody will pray for a miracle, pray for something to save them, to whatever gods are nearby, and that prayer will be answered because you’ll show up"
+  },
+  {
+    "author": "Fjord",
+    "fileRegex": "landscape",
+    "quote": "Sometimes it's just hard figuring out who you should be, instead of who you want to be"
   },
   {
     "author": "Queen Galadriel",

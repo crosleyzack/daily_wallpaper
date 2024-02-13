@@ -28,6 +28,9 @@ ANNOTATE_KEY="annotate"
 QUOTE_KEY="quote"
 AUTHOR_KEY="author"
 
+# Key to request specific items
+USE_AUTHOR=""
+
 # Ensure a base directory was provided.
 if [ -z "$1" ]
 then
@@ -40,8 +43,16 @@ then
     # We will assume wallpaper name if not provided
     WALLPAPER_NAME="$DEFAULT_WALLPAPER_NAME"
 else
+    logger "Using output filename $2"
     WALLPAPER_NAME="$2"
 fi
+# Specify author and wallpaper, possibly
+if [ -n "$3" ]
+then
+    USE_AUTHOR="$3"
+    logger "Selecting only quotes from $USE_AUTHOR"
+fi
+
 logger "create_wallpaper.sh base_dir = $BASE_DIR, wallpaper_name = $WALLPAPER_NAME"
 
 # https://askubuntu.com/questions/742870/background-not-changing-using-gsettings-from-cron
@@ -56,9 +67,17 @@ WALLPAPERS_DIR="$BASE_DIR/$WALLPAPER_DIR_NAME"
 WALLPAPER="$BASE_DIR/$WALLPAPER_NAME"
 MOBILE="$BASE_DIR/$MOBILE_NAME"
 
-# Work on swapping to json
+# get json blob
 FILE_TEXT=$(<$QUOTE_FILE)
-THIS_JSON=$( echo $FILE_TEXT | jq -c '.[]' | shuf -n 1 )
+JQ_SELECTOR=".[]"
+if [ -n "$USE_AUTHOR" ]
+then
+    # logger "Selecting only quotes from $USE_AUTHOR"
+    # echo "Selecting only quotes from $USE_AUTHOR"
+    JQ_SELECTOR=".[] | select(.$AUTHOR_KEY==\"$USE_AUTHOR\")"
+fi
+THIS_JSON=$( echo $FILE_TEXT | jq -c "$JQ_SELECTOR" | shuf -n 1 )
+# Get values from josn
 WORDS_PER_LINE=$( jq ".$WORDS_PER_LINE_KEY // $DEFAULT_WORDS_PER_LINE" <<< "$THIS_JSON" | tr -d '"' )
 FILE_REGEX=$( jq ".$REGEX_KEY // $DEFAULT_FILE_REGEX" <<< "$THIS_JSON" | tr -d '"' )
 FONT_SIZE=$( jq ".$SIZE_KEY // $DEFAULT_FONT_SIZE" <<< "$THIS_JSON" | tr -d '"' )
