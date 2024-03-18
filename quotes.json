@@ -830,6 +830,12 @@
     "quote": "Do not let your eye be drawn by the false beacons of wealth, or position, or fame, or possessions. Be vigilant over your will and desires, for these are the corrupt forces that dwell within, and keep you from living free"
   },
   {
+    "author": "St. Augustine of Hippo",
+    "fileRegex": "cross",
+    "quote": "The mind commands the body and it obeys. The mind orders itself and meets resistance"
+  },
+
+  {
     "author": "St. Bernard of Clairvaux",
     "fileRegex": "cross",
     "quote": "What we love we shall grow to resemble"
@@ -1121,5 +1127,27 @@
     "fileRegex": "landscape",
     "wordsPerLine": 12,
     "quote": "Father, give us courage to change what must be altered, serenity to accept what cannot be helped, and the insight to know the one from the other."
+  },
+  {
+    "author": "Frank Herbert",
+    "fileRegex": "dune",
+    "annotate": "+0+200",
+    "fontSize": 120,
+    "quote": "The mystery of life isn't a problem to solve, but a reality to experience."
+  },
+  {
+    "author": "Frank Herbert",
+    "fileRegex": "dune",
+    "annotate": "+0+200",
+    "fontSize": 120,
+    "quote": "It is impossible to live in the past, difficult to live in the present and a waste to live in the future"
+  },
+  {
+    "author": "Frank Herbert",
+    "fileRegex": "dune",
+    "annotate": "+0+200",
+    "wordsPerLine": 11,
+    "fontSize": 120,
+    "quote": "I must not fear. Fear is the mind-killer. Fear is the little-death that brings total obliteration. I will face my fear. I will permit it to pass over me and through me"
   }
 ]
