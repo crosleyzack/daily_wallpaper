@@ -83,5 +83,15 @@ Schema to use for quote entries in the `quotes.json` file. All values other than
     "author": "Damion Mauville",
     "source": "https://www.deviantart.com/damionmauville/gallery/63670706/avatar-wallpapers",
   },
+  {
+    "wallpapers": "dune.png",
+    "author": "gstudioimagen",
+    "source": "https://www.vecteezy.com/photo/24622803-christian-cross-on-majestic-mountain-peak-at-sunset-generative-ai",
+  },
+  {
+    "wallpapers": "dune.png",
+    "author": "Illustrated Vectors",
+    "source": "https://www.deviantart.com/illustratedvectors/art/Sand-Dune-Mojave-899873021",
+  },
 ]
 ```
