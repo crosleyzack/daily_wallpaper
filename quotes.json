@@ -132,6 +132,11 @@
   {
     "author": "Marcus Aurelius",
     "fileRegex": "landscape",
+    "quote": "Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth."
+  },
+  {
+    "author": "Marcus Aurelius",
+    "fileRegex": "landscape",
     "quote": "Consider at what price you sell your integrity, but please, for God’s sake, don’t sell it cheap."
   },
   {
@@ -158,6 +163,11 @@
     "author": "Marcus Aurelius",
     "fileRegex": "landscape",
     "quote": "Think of the life you have lived until now as over and, as a dead man, see what’s left as a bonus and live it according to Nature."
+  },
+  {
+    "author": "Marcus Aurelius",
+    "fileRegex": "landscape",
+    "quote": "Put from you the belief that 'I have been wronged', and with it will go the feeling. Reject your sense of injury, and the injury itself disappears."
   },
   {
     "author": "Marcus Aurelius",
@@ -418,6 +428,11 @@
   {
     "author": "Epictetus",
     "fileRegex": "landscape",
+    "quote": "The origin of sorrow is this: to wish for something that does not come to pass."
+  },
+  {
+    "author": "Epictetus",
+    "fileRegex": "landscape",
     "quote": "We have two ears and one mouth so that we can listen twice as much as we speak."
   },
   {
@@ -626,6 +641,21 @@
     "quote": "What man actually needs is not a tensionless state but rather the striving and struggling for some goal worthy of him."
   },
   {
+    "author": "Wayne Dyer",
+    "fileRegex": "landscape",
+    "quote": "Peace is the result of retraining your mind to process life as it is, rather than as you think it should be."
+  },
+  {
+    "author": "Eric Butterworth",
+    "fileRegex": "landscape",
+    "quote": "Things may happen around you, and things may happen to you, but the only things that matter are the things that happen in you."
+  },
+  {
+    "author": "Albert Ellis",
+    "fileRegex": "landscape",
+    "quote": "You mainly feel the way you think."
+  },
+  {
     "author": "Heraclitus",
     "fileRegex": "landscape",
     "quote": "You could not step twice into the same river."
@@ -676,6 +706,12 @@
     "fileRegex": "buddha",
     "fontSize": 110,
     "quote": "No one saves us but ourselves. No one can and no one may. We ourselves must walk the path"
+  },
+  {
+    "author": "Gautama Buddha",
+    "fileRegex": "buddha",
+    "fontSize": 110,
+    "quote": "Whatever a person frequently thinks and reflects on, that will become the inclination of their mind."
   },
   {
     "author": "Gautama Buddha",
