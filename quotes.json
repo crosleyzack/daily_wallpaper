@@ -1,5 +1,45 @@
 [
   {
+    "author": "Albert Ellis",
+    "fileRegex": "landscape",
+    "quote": "You mainly feel the way you think."
+  },
+  {
+    "author": "Carl Jung",
+    "fileRegex": "landscape",
+    "quote": "What you resist, persists; What you accept, transforms"
+  },
+  {
+    "author": "Wayne Dyer",
+    "fileRegex": "landscape",
+    "quote": "Peace is the result of retraining your mind to process life as it is, rather than as you think it should be."
+  },
+  {
+    "author": "Eric Butterworth",
+    "fileRegex": "landscape",
+    "quote": "Things may happen around you, and things may happen to you, but the only things that matter are the things that happen in you."
+  },
+  {
+    "author": "Viktor Frankl",
+    "fileRegex": "landscape",
+    "quote": "When we are no longer able to change a situation, we are challenged to change ourselves."
+  },
+  {
+    "author": "Viktor Frankl",
+    "fileRegex": "landscape",
+    "quote": "What man actually needs is not a tensionless state but rather the striving and struggling for some goal worthy of him."
+  },
+  {
+    "author": "Adam Grant",
+    "fileRegex": "landscape",
+    "quote": "Happiness is being content with the path you chose, instead of wondering what might have been, and making others happier."
+  },
+  {
+    "author": "Shamash Alidina",
+    "fileRegex": "landscape",
+    "quote": "Confidence isn't having no fears; confidence is gently moving towards your fears to live the life you wish to live."
+  },
+  {
     "author": "Marcus Aurelius",
     "fileRegex": "landscape",
     "quote": "Confine yourself to the present."
@@ -234,7 +274,6 @@
     "fileRegex": "landscape",
     "quote": "While we are postponing, life speeds by."
   },
-
   {
     "author": "Seneca",
     "fileRegex": "landscape",
@@ -631,31 +670,6 @@
     "quote": "Gratitude is not only the greatest of virtues, but the parent of all others."
   },
   {
-    "author": "Viktor Frankl",
-    "fileRegex": "landscape",
-    "quote": "When we are no longer able to change a situation, we are challenged to change ourselves."
-  },
-  {
-    "author": "Viktor Frankl",
-    "fileRegex": "landscape",
-    "quote": "What man actually needs is not a tensionless state but rather the striving and struggling for some goal worthy of him."
-  },
-  {
-    "author": "Wayne Dyer",
-    "fileRegex": "landscape",
-    "quote": "Peace is the result of retraining your mind to process life as it is, rather than as you think it should be."
-  },
-  {
-    "author": "Eric Butterworth",
-    "fileRegex": "landscape",
-    "quote": "Things may happen around you, and things may happen to you, but the only things that matter are the things that happen in you."
-  },
-  {
-    "author": "Albert Ellis",
-    "fileRegex": "landscape",
-    "quote": "You mainly feel the way you think."
-  },
-  {
     "author": "Heraclitus",
     "fileRegex": "landscape",
     "quote": "You could not step twice into the same river."
@@ -809,6 +823,18 @@
     "fileRegex": "buddha",
     "fontSize": 110,
     "quote": "People take different roads seeking fulfillment and happiness. Just because they’re not on your road doesn’t mean they’ve gotten lost"
+  },
+  {
+    "author": "Eckhart Tolle",
+    "fileRegex": "buddha",
+    "fontSize": 110,
+    "quote": "The beginning of freedom is the realization that you are not your thoughts"
+  },
+  {
+    "author": "Winnifred Wygal",
+    "fileRegex": "landscape",
+    "wordsPerLine": 12,
+    "quote": "Father, give us courage to change what must be altered, serenity to accept what cannot be helped, and the insight to know the one from the other."
   },
   {
     "author": "St. Francis of Assisi",
@@ -1157,12 +1183,6 @@
     "author": "Aragorn",
     "fileRegex": "landscape",
     "quote": "Deeds will not be less valiant because they are unpraised."
-  },
-  {
-    "author": "Winnifred Wygal",
-    "fileRegex": "landscape",
-    "wordsPerLine": 12,
-    "quote": "Father, give us courage to change what must be altered, serenity to accept what cannot be helped, and the insight to know the one from the other."
   },
   {
     "author": "Frank Herbert",
