@@ -103,5 +103,5 @@ convert "$RANDOM_FILE" -font $FONT_NAME -pointsize "$FONT_SIZE" -fill "$FONT_COL
 # MOBILE_TEXT=$(echo $TEXT | xargs -n $MOBILE_WORDS_PER_LINE)
 # convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill white -gravity North -annotate +0+100 "$MOBILE_TEXT" -quality 100 -crop 1080x2160 "$MOBILE"
 
-echo "create_wallpaper.sh Successfully created new wallpaper"
-logger "create_wallpaper.sh Successfully created new wallpaper"
+echo "create_wallpaper.sh Successfully created new wallpaper $WALLPAPER_NAME"
+logger "create_wallpaper.sh Successfully created new wallpaper $WALLPAPER_NAME"

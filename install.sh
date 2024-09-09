@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# TODO use generic install method
-# sudo apt install imagemagick
-# Create sym link, so this is visible to startup
-if ! [ -f /usr/local/bin/convert ]; then
-    sudo ln -s $(which convert) /usr/local/bin/convert
-fi
-
-echo "Installed dependencies"
-
 # Update permissions
 chmod 777 ./set_wallpaper.sh
 chmod 777 ./create_wallpaper.sh

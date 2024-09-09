@@ -31,7 +31,8 @@ logger "set_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_
 
 if [ "$CREATE" == "true" ]
 then
-    bash "$REPO_DIR/create_wallpaper.sh" "$REPO_DIR" "$WALLPAPER_NAME"
+    docker build . -t quote-wallpaper
+    docker run --user 1000:1000 --mount "type=bind,source=$(pwd),target=/app" quote-wallpaper
     echo "Created new wallpaper"
 fi
 
