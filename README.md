@@ -1,13 +1,15 @@
 # random_desktop_quote
 Generates a background on restart which picks and image and quote.
 
-Run `install.sh` to install necessary requirements.
+Run `install.sh` to setup execution on startup and cron.
 
 Put desired base wallpapers in `wallpapers` directory and quotes in `quotes.json` (schema below).
 
 Run `server.sh` on startup. `install.sh` places a `.desktop` file in `$XDG_CONFIG_HOME/autostart` to execute this file automatically.
 
 Execute `wallpaper_cron.sh` to setup a daily cronjob to regenerate desktops, in addition to on startup.
+
+`create_wallpaper.sh` will execute in a docker container to generate the image, requiring no local installs.
 
 # Quotes Schema
 
