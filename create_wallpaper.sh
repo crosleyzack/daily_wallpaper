@@ -43,22 +43,24 @@ then
     # We will assume wallpaper name if not provided
     WALLPAPER_NAME="$DEFAULT_WALLPAPER_NAME"
 else
-    logger "Using output filename $2"
     WALLPAPER_NAME="$2"
 fi
 # Specify author and wallpaper, possibly
 if [ -n "$3" ]
 then
     USE_AUTHOR="$3"
+    echo "Selecting only quotes from $USE_AUTHOR"
     logger "Selecting only quotes from $USE_AUTHOR"
 fi
 
+echo "create_wallpaper.sh base_dir = $BASE_DIR, wallpaper_name = $WALLPAPER_NAME"
 logger "create_wallpaper.sh base_dir = $BASE_DIR, wallpaper_name = $WALLPAPER_NAME"
 
 # https://askubuntu.com/questions/742870/background-not-changing-using-gsettings-from-cron
 REAL_UID=$(id --real --user)
 PID=$(pgrep --euid $REAL_UID gnome-session | head -n 1)
 export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2- | sed -e "s/\x0//g")
+echo "create_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
 logger "create_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
 
 # Set path to wallpaper files
@@ -103,5 +105,5 @@ convert "$RANDOM_FILE" -font $FONT_NAME -pointsize "$FONT_SIZE" -fill "$FONT_COL
 # MOBILE_TEXT=$(echo $TEXT | xargs -n $MOBILE_WORDS_PER_LINE)
 # convert "$RANDOM_FILE" -pointsize "$FONT_SIZE" -fill white -gravity North -annotate +0+100 "$MOBILE_TEXT" -quality 100 -crop 1080x2160 "$MOBILE"
 
-echo "create_wallpaper.sh Successfully created new wallpaper $WALLPAPER_NAME"
-logger "create_wallpaper.sh Successfully created new wallpaper $WALLPAPER_NAME"
+echo "create_wallpaper.sh Successfully created new wallpaper $WALLPAPER"
+logger "create_wallpaper.sh Successfully created new wallpaper $WALLPAPER"
