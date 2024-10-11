@@ -8,10 +8,15 @@ on:
   schedule:
     - cron: "0 0 * * *"
 jobs:
-  build:
-    runs-on: alpine:3.20
-    volumes:
-      - /src:/src
+  make-wallpaper:
+    name: "Generate the wallpaper image"
+    container:
+      image: alpine:3.20
+      options: --user 1000
+      volumes:
+        - /src:/src
+        - /assets:/assets
+        - /data:/data
     steps:
       - uses: actions/checkout@v3
       - name: Install requirements
