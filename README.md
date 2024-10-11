@@ -92,7 +92,7 @@ Schema to use for quote entries in the `quotes.json` file. All values other than
     "source": "https://www.deviantart.com/damionmauville/gallery/63670706/avatar-wallpapers",
   },
   {
-    "wallpapers": "dune.png",
+    "wallpapers": "cross.png",
     "author": "gstudioimagen",
     "source": "https://www.vecteezy.com/photo/24622803-christian-cross-on-majestic-mountain-peak-at-sunset-generative-ai",
   },
