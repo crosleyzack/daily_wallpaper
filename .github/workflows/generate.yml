@@ -10,6 +10,7 @@ on:
 jobs:
   make-wallpaper:
     name: "Generate the wallpaper image"
+    runs-on: alpine-latest
     container:
       image: alpine:3.20
       options: --user 1000
