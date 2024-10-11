@@ -9,11 +9,11 @@ on:
     - cron: "0 0 * * *"
 
 runs-on: alpine-latest
-    container:
-      image: alpine:3.20
+  container:
+    image: alpine:3.20
 RUN apk add --no-cache mysql-client
-      volumes:
-        - /source:/app
+    volumes:
+      - /source:/app
     steps:
       - uses: actions/checkout@v3
       - name: Install requirements
