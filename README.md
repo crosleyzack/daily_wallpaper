@@ -1,17 +1,17 @@
 # random_desktop_quote
 Generates a background on restart which picks and image and quote.
 
-Run `install.sh` to setup execution on startup and cron.
+Run `task install` to setup execution on startup and cron.
 
 Put desired base wallpapers in `wallpapers` directory and quotes in `quotes.json` (schema below).
 
-Run `server.sh` on startup. `install.sh` places a `.desktop` file in `$XDG_CONFIG_HOME/autostart` to execute this file automatically.
+Wallpapers can be generated locally with `task create` and set as wallpaper on a gnome desktop with `task set`
 
-Execute `wallpaper_cron.sh` to setup a daily cronjob to regenerate desktops, in addition to on startup.
+`task sync` will pull todays wallpaper from the github repository. Daily wallpaper should be generated at midnight.
 
-`create_wallpaper.sh` will execute in a docker container to generate the image, requiring no local installs.
+On startup, cron will run pull desktop from github repository and set it as the current wallpaper.
 
-`set_wallpaper.sh` only works with gnome desktop.
+To create your own wallpaper locally, run `create_wallpaper.sh` and `set_wallpaper.sh` with appropriate args or `task create` and `task set`
 
 # Today's Wallpaper
 
