@@ -1,0 +1,28 @@
+name: Generate Wallpaper
+description: Create daily wallpaper
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 0 * * *"
+
+runs-on: alpine-latest
+    container:
+      image: alpine:3.20
+RUN apk add --no-cache mysql-client
+      volumes:
+        - /source:/app
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install requirements
+        run: apk add jq imagemagick
+      - name: 
+        run: /src/create_wallpaper.sh /assets /data
+      - run: |
+        git config user.name crosleyzack
+        git config user.email crosleyzack@gmail.com
+        git add /assets/wallpaper.png
+        git diff --quiet && git diff --staged --quiet || git commit -m "[gh-action] Daily Wallpaper"
+        git push origin master

@@ -16,4 +16,4 @@ RUN apt-get install -y vim
 # COPY wallpapers /app/wallpapers/
 # VOLUME ["/app/out"]
 
-CMD /app/create_wallpaper.sh /app ${FILENAME}
+CMD /src/create_wallpaper.sh /assets /data

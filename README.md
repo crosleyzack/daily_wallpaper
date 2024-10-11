@@ -13,6 +13,10 @@ Execute `wallpaper_cron.sh` to setup a daily cronjob to regenerate desktops, in 
 
 `set_wallpaper.sh` only works with gnome desktop.
 
+# Today's Wallpaper
+
+![Todays Wallpaper](assets/wallpaper.png)
+
 # Quotes Schema
 
 Schema to use for quote entries in the `quotes.json` file. All values other than `quote` and `author` have a default in `create_wallpaper.sh` and can be ommitted.

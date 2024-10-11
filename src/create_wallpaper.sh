@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Generate new wallpaper
-
 # Set constants.
 DEFAULT_WORDS_PER_LINE=11
 DEFAULT_FONT_SIZE=85
@@ -31,30 +29,36 @@ AUTHOR_KEY="author"
 # Key to request specific items
 USE_AUTHOR=""
 
-# Ensure a base directory was provided.
-if [ -z "$1" ]
+# Ensure a wallpaper directory was provided
+if [ ! -d "$1" ]
 then
-    echo "create_wallpaper.sh \$1 must be base directory"
+    echo "create_wallpaper.sh \$1 must be asset directory"
     exit 1
 fi
-BASE_DIR=$(realpath $1)
-if [ -z "$2" ]
+ASSET_DIR=$(realpath $1)
+if [ ! -d "$2" ]
+then
+    echo "create_wallpaper.sh \$2 must be data directory"
+    exit 1
+fi
+DATA_DIR=$(realpath $2)
+if [ -z "$3" ]
 then
     # We will assume wallpaper name if not provided
     WALLPAPER_NAME="$DEFAULT_WALLPAPER_NAME"
 else
-    WALLPAPER_NAME="$2"
+    WALLPAPER_NAME="$3"
 fi
 # Specify author and wallpaper, possibly
-if [ -n "$3" ]
+if [ -n "$4" ]
 then
-    USE_AUTHOR="$3"
+    USE_AUTHOR="$4"
     echo "Selecting only quotes from $USE_AUTHOR"
     logger "Selecting only quotes from $USE_AUTHOR"
 fi
 
-echo "create_wallpaper.sh base_dir = $BASE_DIR, wallpaper_name = $WALLPAPER_NAME"
-logger "create_wallpaper.sh base_dir = $BASE_DIR, wallpaper_name = $WALLPAPER_NAME"
+echo "create_wallpaper.sh asset_dir = $ASSET_DIR, data_dir = $DATA_DIR, wallpaper_name = $WALLPAPER_NAME"
+logger "create_wallpaper.sh asset_dir = $ASSET_DIR, data_dir = $DATA_DIR, wallpaper_name = $WALLPAPER_NAME"
 
 # https://askubuntu.com/questions/742870/background-not-changing-using-gsettings-from-cron
 REAL_UID=$(id --real --user)
@@ -64,10 +68,10 @@ echo "create_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION
 logger "create_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
 
 # Set path to wallpaper files
-QUOTE_FILE="$BASE_DIR/$QUOTE_FILE"
-WALLPAPERS_DIR="$BASE_DIR/$WALLPAPER_DIR_NAME"
-WALLPAPER="$BASE_DIR/$WALLPAPER_NAME"
-MOBILE="$BASE_DIR/$MOBILE_NAME"
+WALLPAPER_DIR="$ASSET_DIR/$WALLPAPER_DIR_NAME"
+QUOTE_FILE="$DATA_DIR/$QUOTE_FILE"
+WALLPAPER="$ASSET_DIR/$WALLPAPER_NAME"
+# MOBILE="$PARENT_DIR/$MOBILE_NAME"
 
 # get json blob
 FILE_TEXT=$(<$QUOTE_FILE)

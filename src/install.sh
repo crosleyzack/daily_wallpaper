@@ -1,25 +1,26 @@
 #!/bin/bash
 
+FILE_PATH=$(realpath $BASH_SOURCE)
+DIR_PATH=$(dirname $FILE_PATH)
+
 # Update permissions
-chmod 777 ./set_wallpaper.sh
-chmod 777 ./create_wallpaper.sh
-chmod 777 ./sync_wallpaper.sh
-chmod 777 ./server.sh
-chmod 777 ./wallpaper_cron.sh
-chmod 666 quotes.json
-chmod 777 wallpapers
-find wallpapers -type f -exec chmod 666 {} \;
+chmod 777 $DIR_PATH/set_wallpaper.sh
+chmod 777 $DIR_PATH/create_wallpaper.sh
+chmod 777 $DIR_PATH/sync_wallpaper.sh
+chmod 777 $DIR_PATH/server.sh
+chmod 777 $DIR_PATH/wallpaper_cron.sh
+chmod 666 $DIR_PATH/../data/quotes.json
+chmod 777 $DIR_PATH/../assets/wallpapers
+find $DIR_PATH/../assets/wallpapers -type f -exec chmod 666 {} \;
 
 # Dumb permissions stuff
-sudo chown $USER:$USER ~/.config/dconf -R
+# sudo chown $USER:$USER ~/.config/dconf -R
 chmod u+w ~/.config/dconf -R
 
 echo "updated permissions"
 
 # make desktop startup file
 # https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
-FILE_PATH=$(realpath $BASH_SOURCE)
-DIR_PATH=$(dirname $FILE_PATH)
 WALLPAPER_FILE="$DIR_PATH/wallpaper.desktop"
 rm -f $WALLPAPER_FILE
 echo "[Desktop Entry]
@@ -31,8 +32,7 @@ Comment=Create a new wallpaper
 Exec=$DIR_PATH/wallpaper_cron.sh
 OnlyShowIn=GNOME;" > $WALLPAPER_FILE
 
-
-echo "Created wallpaper file $WALLPAPER_FILE"
+echo "Wallpaper file created"
 
 # Set for gnome to run at startup
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
