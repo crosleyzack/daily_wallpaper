@@ -10,18 +10,11 @@ on:
 jobs:
   make-wallpaper:
     name: "Generate the wallpaper image"
-    runs-on: alpine-latest
-    container:
-      image: alpine:3.20
-      options: --user 1000
-      volumes:
-        - /src:/src
-        - /assets:/assets
-        - /data:/data
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v3
       - name: Install requirements
-        run: apk add jq imagemagick
+        run: apt-get install -y jq imagemagick procps
       - name:
         run: /src/create_wallpaper.sh /assets /data
       - run: |
