@@ -20,4 +20,5 @@ fi
 
 ASSETS_DIR=$(realpath $1)
 
-curl https://github.com/CrosleyZack/random_desktop_quote/tree/main/assets/wallpaper.png -o $ASSETS_DIR/$WALLPAPER_NAME
+rm -f $ASSETS_DIR/$WALLPAPER_NAME
+curl https://raw.githubusercontent.com/CrosleyZack/random_desktop_quote/refs/heads/main/assets/wallpaper.png -o $ASSETS_DIR/$WALLPAPER_NAME
