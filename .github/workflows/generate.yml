@@ -11,9 +11,8 @@ on:
 runs-on: alpine-latest
   container:
     image: alpine:3.20
-RUN apk add --no-cache mysql-client
     volumes:
-      - /source:/app
+      - /src:/src
     steps:
       - uses: actions/checkout@v3
       - name: Install requirements
