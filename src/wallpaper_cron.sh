@@ -28,6 +28,7 @@ if [ -z "$found" ]
 then
     echo "wallpaper_cron adding cron to crontab"
     logger "wallpaper_cron adding cron to crontab"
+    # TODO if github cron works, this should just sync
     echo "$MIN $HOUR * * * CREATE=true SET=true $SERVER_EXE $SCRIPT_DIR wallpaper.png" >> crontab_new
 fi
 crontab crontab_new

@@ -20,3 +20,8 @@ tasks:
     cmds:
       - ./src/set_wallpaper.sh ./assets/wallpaper.png
 
+  sync:
+    desc: Pulls wallpaper from remote host
+    dir: "{{.TASKFILE_DIR}}"
+    cmds:
+      - ./src/sync_wallpaper.sh ./assets
