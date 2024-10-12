@@ -1,17 +1,20 @@
 # random_desktop_quote
-Generates a background on restart which picks and image and quote.
 
-Run `task install` to setup execution on startup and cron.
+Generates a daily wallpaper by pairing an image from `assets/wallpapers` and a quote from `data/quotes.json`
 
-Put desired base wallpapers in `wallpapers` directory and quotes in `quotes.json` (schema below).
+# Quick Start
 
-Wallpapers can be generated locally with `task create` and set as wallpaper on a gnome desktop with `task set`
+## To Use This Wallpaper
 
-`task sync` will pull todays wallpaper from the github repository. Daily wallpaper should be generated at midnight.
+`task sync` will pull todays wallpaper from the github repository. Daily wallpaper should be generated at midnight. `task set` will set the wallpaper as the background (only works as written on gnome).
 
-On startup, cron will run pull desktop from github repository and set it as the current wallpaper.
+Run `task install` to setup pull daily wallpaper on startup and on 6am morning cron.
 
-To create your own wallpaper locally, run `create_wallpaper.sh` and `set_wallpaper.sh` with appropriate args or `task create` and `task set`
+## Use My Own Wallpapers
+
+To use your own wallpapers and quotes, you can fork the repo change the source `src/sync_wallpaper.sh` pulls the image from.
+
+To run locally only, update `install.sh` to have cron and startup run `src/create_wallpaper.sh` rather than `src/sync_wallpaper.sh`. You can grab the code from `task create` to run this in a docker container.
 
 # Today's Wallpaper
 
@@ -72,34 +75,4 @@ Schema to use for quote entries in the `quotes.json` file. All values other than
 
 :warning:  Just because a field can be changed doesn't mean it should
 
-# Credits
-
-```json
-[
-  {
-    "wallpapers": "landscape*.png",
-    "author": "Louis Coyle",
-    "source": "https://louie.co.nz/25th_hour/",
-  },
-  {
-    "wallpapers": "buddha.png",
-    "author": "Phil Distress",
-    "source": "https://www.deviantart.com/phildistress/art/Moonlight-Meditation-811660312",
-  },
-  {
-    "wallpapers": "iroh*.png",
-    "author": "Damion Mauville",
-    "source": "https://www.deviantart.com/damionmauville/gallery/63670706/avatar-wallpapers",
-  },
-  {
-    "wallpapers": "cross.png",
-    "author": "gstudioimagen",
-    "source": "https://www.vecteezy.com/photo/24622803-christian-cross-on-majestic-mountain-peak-at-sunset-generative-ai",
-  },
-  {
-    "wallpapers": "dune.png",
-    "author": "Illustrated Vectors",
-    "source": "https://www.deviantart.com/illustratedvectors/art/Sand-Dune-Mojave-899873021",
-  },
-]
-```
+#  [sub-section](./ACKNOWLEDGMENTS.md)
