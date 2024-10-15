@@ -1,24 +1,24 @@
-# random_desktop_quote
+# Daily Wallpaper
 
 Generates a daily wallpaper by pairing an image from `assets/wallpapers` and a quote from `data/quotes.json`
 
+# Today's Wallpaper
+
+![Todays Wallpaper](assets/wallpaper.png)
+
 # Quick Start
 
-## To Use This Wallpaper
+### To Use This Wallpaper
 
 `task sync` will pull todays wallpaper from the github repository. Daily wallpaper should be generated at midnight. `task set` will set the wallpaper as the background (only works as written on gnome).
 
 Run `task install` to setup pull daily wallpaper on startup and on 6am morning cron.
 
-## Use My Own Wallpapers
+### Use My Own Wallpapers
 
 To use your own wallpapers and quotes, you can fork the repo change the source `src/sync_wallpaper.sh` pulls the image from.
 
 To run locally only, update `install.sh` to have cron and startup run `src/create_wallpaper.sh` rather than `src/sync_wallpaper.sh`. You can grab the code from `task create` to run this in a docker container.
-
-# Today's Wallpaper
-
-![Todays Wallpaper](assets/wallpaper.png)
 
 # Quotes Schema
 
