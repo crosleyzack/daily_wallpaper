@@ -1187,23 +1187,17 @@
   {
     "author": "Frank Herbert",
     "fileRegex": "dune",
-    "annotate": "+0+200",
-    "fontSize": 120,
     "quote": "The mystery of life isn't a problem to solve, but a reality to experience."
   },
   {
     "author": "Frank Herbert",
     "fileRegex": "dune",
-    "annotate": "+0+200",
-    "fontSize": 120,
     "quote": "It is impossible to live in the past, difficult to live in the present and a waste to live in the future"
   },
   {
     "author": "Frank Herbert",
     "fileRegex": "dune",
-    "annotate": "+0+200",
     "wordsPerLine": 11,
-    "fontSize": 120,
     "quote": "I must not fear. Fear is the mind-killer. Fear is the little-death that brings total obliteration. I will face my fear. I will permit it to pass over me and through me"
   }
 ]
