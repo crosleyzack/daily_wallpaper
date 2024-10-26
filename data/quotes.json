@@ -930,6 +930,7 @@
   {
     "author": "St. Bernard of Clairvaux",
     "fileRegex": "cross",
+    "wordsPerLine": 13,
     "quote": "You will find something far greater in the woods than in books. Stones and trees will teach you that which you cannot learn from the masters"
   },
   {
