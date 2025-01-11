@@ -1201,5 +1201,46 @@
     "fileRegex": "dune",
     "wordsPerLine": 11,
     "quote": "I must not fear. Fear is the mind-killer. Fear is the little-death that brings total obliteration. I will face my fear. I will permit it to pass over me and through me"
+  },
+  {
+    "author": "Hayao Miyazaki",
+    "fileRegex": "landscape",
+    "quote": "You must see with eyes unclouded by hate. See the good in that which is evil, and the evil in that which is good"
+  },
+  {
+    "author": "Hayao Miyazaki",
+    "fileRegex": "landscape",
+    "paraphrased": true,
+    "quote": "I want to portray a relationship where two mutually inspire each other to live - a true expression of love"
+  },
+  {
+    "author": "Hayao Miyazaki",
+    "fileRegex": "landscape",
+    "paraphrased": true,
+    "quote": "The idea that whenever something evil happens someone particular can be blamed and punished for it, in life and in politics is hopeless"
+  },
+  {
+    "author": "Hayao Miyazaki",
+    "fileRegex": "landscape",
+    "paraphrased": true,
+    "quote": "We depict hatred, but it is to depict that there are more important things. We depict a curse, to depict the joy of liberation"
+  },
+  {
+    "author": "Hayao Miyazaki",
+    "fileRegex": "landscape",
+    "paraphrased": true,
+    "quote": "There is no future for people who worship the future, and forget the past"
+  },
+  {
+    "author": "Hayao Miyazaki",
+    "fileRegex": "landscape",
+    "paraphrased": true,
+    "quote": "You cannot alter your fate. However, you can rise to meet it"
+  },
+  {
+    "author": "Hayao Miyazaki",
+    "fileRegex": "landscape",
+    "paraphrased": true,
+    "quote": "Life is suffering. It is hard. The world is cursed. But still, you find reasons to keep living"
   }
 ]

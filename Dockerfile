@@ -6,7 +6,7 @@ FROM debian:bookworm
 ARG FILENAME="wallpaper.png"
 ENV FILENAME=${FILENAME}
 
-RUN apt-get update && apt-get upgrade
+RUN apt-get update
 RUN apt-get install -y jq imagemagick procps
 RUN apt-get install -y vim
 
