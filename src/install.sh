@@ -54,15 +54,18 @@ echo "Set to run at startup"
 echo "Install complete"
 
 # Setup cron
-crontab -l > CRONTAB_NEW
-found=$( grep "$COMMAND" CRONTAB_NEW )
-if [ -z "$found" ]
-then
-    echo "wallpaper_cron adding cron to crontab"
-    logger "wallpaper_cron adding cron to crontab"
-    # TODO if github cron works, this should just sync
-    ENTRY="$MIN $HOUR * * * $COMMAND"
-    echo "$ENTRY" >> CRONTAB_NEW
-fi
-crontab CRONTAB_NEW
-rm CRONTAB_NEW
+# TODO: systemd timer as alternative?
+setup_crontab () {
+    crontab -l > CRONTAB_NEW
+    found=$( grep "$COMMAND" CRONTAB_NEW )
+    if [ -z "$found" ]
+    then
+        echo "wallpaper_cron adding cron to crontab"
+        logger "wallpaper_cron adding cron to crontab"
+        # TODO if github cron works, this should just sync
+        ENTRY="$MIN $HOUR * * * $COMMAND"
+        echo "$ENTRY" >> CRONTAB_NEW
+    fi
+    crontab CRONTAB_NEW
+    rm CRONTAB_NEW
+}
