@@ -19,7 +19,6 @@ fi
 ASSETS_DIR=$(realpath $1)
 
 echo "sync_wallpaper.sh retrieving $ASSETS_DIR/$WALLPAPER_NAME"
-rm -f $ASSETS_DIR/$WALLPAPER_NAME
 wget -v -O $ASSETS_DIR/$WALLPAPER_NAME http://raw.githubusercontent.com/CrosleyZack/random_desktop_quote/refs/heads/main/assets/wallpaper.png
 # curl -v http://raw.githubusercontent.com/CrosleyZack/random_desktop_quote/refs/heads/main/assets/wallpaper.png -o $ASSETS_DIR/$WALLPAPER_NAME
 logger "sync_wallpaper.sh $ASSETS_DIR/$WALLPAPER_NAME retrieved"
