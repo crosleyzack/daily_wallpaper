@@ -17,18 +17,9 @@ REAL_UID=$(id --real --user)
 PID=$(pgrep --euid $REAL_UID gnome-session | head -n 1)
 echo "set_wallpaper.sh1 $PID"
 logger "set_wallpaper.sh1 $PID"
-PID=$(pgrep -f 'gnome-session' | head -n1)
-echo "set_wallpaper.sh2 $PID"
-logger "set_wallpaper.sh2 $PID"
-PID=$(pgrep --euid $EUID gnome-session)
-echo "set_wallpaper.sh3 $PID"
-logger "set_wallpaper.sh3 $PID"
-export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
-echo "set_wallpaper.sh4 $DBUS_SESSION_BUS_ADDRESS"
-logger "set_wallpaper.sh4 $DBUS_SESSION_BUS_ADDRESS"
-# export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2- | sed -e "s/\x0//g")
-echo "set_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
-logger "set_wallpaper.sh UID = $REAL_UID; PID = $REAL_PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
+export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2- | sed -e "s/\x0//g")
+echo "set_wallpaper.sh UID = $REAL_UID; PID = $PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
+logger "set_wallpaper.sh UID = $REAL_UID; PID = $PID; DBUS = $DBUS_SESSION_BUS_ADDRESS"
 
 # Update background
 echo "set_wallpaper.sh setting $WALLPAPER"
