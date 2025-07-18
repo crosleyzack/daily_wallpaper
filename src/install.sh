@@ -28,7 +28,7 @@ chmod u+w ~/.config/dconf -R
 echo "updated permissions"
 
 # Command is to pull desktop from remote and set
-COMMAND="$SYNC_EXE $ASSET_DIR wallpaper.png && $SET_EXE $ASSET_DIR/wallpaper.png"
+COMMAND="sh -c \"$SYNC_EXE $ASSET_DIR wallpaper.png && $SET_EXE $ASSET_DIR/wallpaper.png\""
 
 # make desktop startup file
 # https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
