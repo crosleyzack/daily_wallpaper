@@ -46,10 +46,14 @@ OnlyShowIn=GNOME;" > $WALLPAPER_FILE
 # Set for gnome to run at startup
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 AUTOSTART_DIR="$XDG_CONFIG_HOME/autostart"
-AUTOSTART_FILE="$AUTOSTART_DIR/wallpaper.desktop"
+DESKTOP_FILE="/wallpaper.desktop"
+APP_DIR="$HOME/.local/share/applications"
 mkdir -p $AUTOSTART_DIR
-rm -f $AUTOSTART_FILE
-ln -s $WALLPAPER_FILE $AUTOSTART_FILE
+rm -f $AUTOSTART_DIR/$DESKTOP_FILE
+ln -s $WALLPAPER_FILE $AUTOSTART_DIR/$DESKTOP_FILE
+mkdir -p $APP_DIR
+rm -f $APP_DIR/$DESKTOP_FILE
+ln -s $WALLPAPER_FILE $APP_DIR/$DESKTOP_FILE
 echo "Set to run at startup"
 echo "Install complete"
 
