@@ -656,6 +656,11 @@
     "quote": "Failure is only the opportunity to begin again. Only this time, more wisely."
   },
   {
+    "author": "Lao Tzu",
+    "fileRegex": "landscape",
+    "quote": "Life is a series of natural and spontaneous changes. Don’t resist them; that only creates sorrow. Let reality be reality."
+  },
+  {
     "author": "Gautama Buddha",
     "fileRegex": "buddha",
     "fontSize": 110,
@@ -938,6 +943,11 @@
     "quote": "We must love them both, those whose opinions we share and those whose opinions we reject, for both have labored in the search for truth, and both have helped us in finding it"
   },
   {
+    "author": "Desiderius Erasmus",
+    "fileRegex": "cross",
+    "quote": "In the land of the blind, the one-eyed man is king"
+  },
+  {
     "author": "Pope John Paul II",
     "fileRegex": "cross",
     "quote": "Love between man and woman cannot be built without sacrifices and self-denial"
@@ -1102,28 +1112,28 @@
     "quote": "Sometimes life is like this dark tunnel. You can't always see the light at the end of the tunnel, but if you just keep moving, you will come to a better place"
   },
   {
-    "author": "Caduceus Clay",
+    "author": "Taliesin Jaffe",
     "fileRegex": "landscape",
     "quote": "Eventually, some day, somebody will pray for a miracle, pray for something to save them, to whatever gods are nearby, and that prayer will be answered because you’ll show up"
   },
   {
-    "author": "Gandalf",
+    "author": "J.R.R Tolkien",
     "fileRegex": "landscape",
     "wordsPerLine": 13,
     "quote": "Do not be too eager to deal out death in judgment. Even the very wise cannot see all ends."
   },
   {
-    "author": "Gandalf",
+    "author": "J.R.R Tolkien",
     "fileRegex": "landscape",
     "quote": "Despair is only for those who see the end beyond all doubt. We do not."
   },
   {
-    "author": "Gandalf",
+    "author": "J.R.R Tolkien",
     "fileRegex": "landscape",
     "quote": "All we have to decide is what to do with the time that is given us."
   },
   {
-    "author": "Aragorn",
+    "author": "J.R.R Tolkien",
     "fileRegex": "landscape",
     "quote": "Deeds will not be less valiant because they are unpraised."
   },
