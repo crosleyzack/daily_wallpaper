@@ -14,12 +14,12 @@ SET_EXE="$DIR_PATH/set_wallpaper.sh"
 SYNC_EXE="$DIR_PATH/sync_wallpaper.sh"
 
 # Update permissions
-chmod 777 $CREATE_EXE
-chmod 777 $SET_EXE
-chmod 777 $SYNC_EXE
-chmod 666 $DATA_DIR/quotes.json
-chmod 777 $ASSET_DIR/wallpapers
-find $ASSET_DIR/wallpapers -type f -exec chmod 666 {} \;
+chmod 755 $CREATE_EXE
+chmod 755 $SET_EXE
+chmod 755 $SYNC_EXE
+chmod 644 $DATA_DIR/quotes.json
+chmod 755 $ASSET_DIR/wallpapers
+find $ASSET_DIR/wallpapers -type f -exec chmod 644 {} \;
 
 # Dumb permissions stuff
 # sudo chown $USER:$USER ~/.config/dconf -R
