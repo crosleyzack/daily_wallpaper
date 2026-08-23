@@ -1,6 +1,8 @@
 {
   "name": "wallpaper",
-  "image": "mcr.microsoft.com/devcontainers/rust:1-bookworm",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
@@ -26,14 +28,17 @@
     "source=wallpaper-cargo-registry,target=/usr/local/cargo/registry,type=volume",
     "source=wallpaper-target,target=${containerWorkspaceFolder}/target,type=volume"
   ],
-  // The three entries run in parallel.
+  // The four entries run in parallel.
   "postCreateCommand": {
     // Podman/Docker creates the parents of the opencode bind mount (~/.local, ~/.local/share) as root.
     // Reclaim them so opencode can write its state dir.
     "permissions": "sudo mkdir -p /home/vscode/.local/state && sudo chown vscode:vscode /home/vscode/.local /home/vscode/.local/share /home/vscode/.local/state",
     // Docker makes new named volumes with root as the owner.
     "rust": "sudo chown -R vscode:vscode /usr/local/cargo/registry ${containerWorkspaceFolder}/target && cargo fetch --locked",
-    "opencode": "curl -fsSL https://opencode.ai/install | VERSION=${OPENCODE_VERSION} bash -s -- --no-modify-path"
+    "opencode": "curl -fsSL https://opencode.ai/install | VERSION=${OPENCODE_VERSION} bash -s -- --no-modify-path",
+    // Monaspace static weights for the wallpaper generator (default font is
+    // `Monaspace-Neon-Light`), installed system-wide and indexed by fontconfig.
+    "fonts": "sudo mkdir -p /usr/local/share/fonts/monaspace && tmp=$(mktemp) && curl -fsSL https://github.com/githubnext/monaspace/releases/download/v1.400/monaspace-static-v1.400.zip -o \"$tmp\" && sudo unzip -qoj \"$tmp\" '*.otf' -d /usr/local/share/fonts/monaspace && rm -f \"$tmp\" && sudo fc-cache -f"
   },
   "customizations": {
     "vscode": {
