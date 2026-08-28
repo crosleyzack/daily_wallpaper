@@ -8,10 +8,11 @@ jobs:
   make-wallpaper:
     name: "Generate the wallpaper image"
     runs-on: ubuntu-slim
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7
       # TODO create-github-app-token to allow pushing around restrictions
-      - uses: actions/checkout@v3
       - name: Install requirements
         run: |
           sudo apt-get update
