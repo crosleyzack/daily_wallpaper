@@ -1,5 +1,7 @@
 # Daily Wallpaper
 
+[![Dependabot Updates](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates)
+
 Generates a daily wallpaper by pairing an image from `assets/wallpapers` and a quote from `data/quotes.json`
 
 # Today's Wallpaper
