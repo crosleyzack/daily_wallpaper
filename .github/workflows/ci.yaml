@@ -20,13 +20,16 @@ jobs:
           components: rustfmt
       - run: cargo fmt --all --check
 
+  # put all test dependent on image magick into a single job to avoid repeat setup
   tests:
-    runs-on: ubuntu-slim
+    # required for image magick 7.1
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           components: rustfmt, clippy
+      - run: sudo apt-get update
       - run: sudo apt-get install -y libmagickwand-dev libclang-dev clang pkg-config
       - run: cargo clippy --all --all-targets --all-features
       - run: cargo check --all --all-targets --all-features
