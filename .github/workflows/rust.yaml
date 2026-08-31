@@ -1,0 +1,21 @@
+on: push
+  workflow_dispatch:
+  push:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+name: rust check
+jobs:
+  clippy_check:
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v7
+      - run: rustup component add clippy
+      - uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features
+      - uses: rust-marker/marker@v0.5  
+      - uses: actions-rs/audit-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
