@@ -36,9 +36,6 @@
     // Docker makes new named volumes with root as the owner.
     "rust": "sudo chown -R vscode:vscode /usr/local/cargo/registry ${containerWorkspaceFolder}/target && cargo fetch --locked",
     "opencode": "curl -fsSL https://opencode.ai/install | VERSION=${OPENCODE_VERSION} bash -s -- --no-modify-path",
-    // Monaspace static weights for the wallpaper generator (default font is
-    // `Monaspace-Neon-Light`), installed system-wide and indexed by fontconfig.
-    "fonts": "sudo mkdir -p /usr/local/share/fonts/monaspace && tmp=$(mktemp) && curl -fsSL https://github.com/githubnext/monaspace/releases/download/v1.400/monaspace-static-v1.400.zip -o \"$tmp\" && sudo unzip -qoj \"$tmp\" '*.otf' -d /usr/local/share/fonts/monaspace && rm -f \"$tmp\" && sudo fc-cache -f"
   },
   "customizations": {
     "vscode": {
