@@ -47,38 +47,13 @@ fn main() {
             };
         }
         Some(("set", sub_matches)) => {
-            // TODO
-            let color = sub_matches
-                .get_one::<String>("color")
-                .map(|s| s.as_str())
-                .expect("defaulted in clap");
-
-            let mut base = sub_matches.get_one::<String>("base").map(|s| s.as_str());
-            let mut head = sub_matches.get_one::<String>("head").map(|s| s.as_str());
-            let mut path = sub_matches.get_one::<String>("path").map(|s| s.as_str());
-            if path.is_none() {
-                path = head;
-                head = None;
-                if path.is_none() {
-                    path = base;
-                    base = None;
-                }
-            }
-            let base = base.unwrap_or("stage");
-            let head = head.unwrap_or("worktree");
-            let path = path.unwrap_or("");
-            println!("Diffing {base}..{head} {path} (color={color})");
+            println!("not implemented: {:?}", sub_matches);
         }
         Some(("sync", sub_matches)) => {
-            println!(
-                "Pushing to {}",
-                sub_matches.get_one::<String>("REMOTE").expect("required")
-            );
+            println!("not implemented: {:?}", sub_matches);
         }
         _ => unreachable!(), // If all subcommands are defined above, anything else is unreachable!()
     }
-
-    // Continued program logic goes here...
 }
 
 fn run_create(sub_matches: &ArgMatches) -> Result<(), Error> {

@@ -14,7 +14,7 @@ static START: Once = Once::new();
 const DEFAULT_WORDS_PER_LINE: i32 = 11;
 const DEFAULT_FONT_SIZE: f64 = 85.0;
 const DEFAULT_FONT_COLOR: &str = "white";
-const DEFAULT_FONT: &str = "Monaspace-Neon-Light";
+const DEFAULT_FONT: &str = "DejaVu-Sans";
 const DEFAULT_GRAVITY: &str = "North";
 const DEFAULT_ANNOTATE: &str = "+0+120";
 
