@@ -3,7 +3,7 @@ use magick_rust::{
     DrawingWand, GravityType, MagickError, MagickWand, PixelWand, magick_wand_genesis,
 };
 use std::io::Error;
-use std::path::PathBuf;
+use std::path::Path;
 use std::sync::Once;
 
 // Used to make sure MagickWand is initialized exactly once. Note that we do not
@@ -18,7 +18,7 @@ const DEFAULT_FONT: &str = "DejaVu-Sans";
 const DEFAULT_GRAVITY: &str = "North";
 const DEFAULT_ANNOTATE: &str = "+0+120";
 
-/// Maps a gravity string (e.g. "south", "center") to its ImageMagick enum.
+/// Maps a gravity string (e.g. "south", "center") to its `ImageMagick` enum.
 fn gravity_type(gravity: &str) -> GravityType {
     match gravity.to_ascii_lowercase().as_str() {
         "northwest" => GravityType::NorthWest,
@@ -56,7 +56,7 @@ fn split_quote(quote: &str, words_per_line: i32) -> String {
 }
 
 /// Renders `quote` onto `src` and writes the result to `dest`.
-pub(super) fn generate_wp(quote: Quote, src: PathBuf, dest: PathBuf) -> Result<(), Error> {
+pub(super) fn generate_wp(quote: Quote, src: &Path, dest: &Path) -> Result<(), Error> {
     START.call_once(|| {
         magick_wand_genesis();
     });
@@ -107,4 +107,80 @@ pub(super) fn generate_wp(quote: Quote, src: PathBuf, dest: PathBuf) -> Result<(
     io(wand.set_image_compression_quality(100))?;
     io(wand.write_image(&dest.to_string_lossy()))?;
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{parse_annotate_loc, split_quote};
+
+    #[test]
+    fn parse_annotate_loc_valid() {
+        assert_eq!(parse_annotate_loc("+100+100"), Some((100.0, 100.0)));
+    }
+
+    #[test]
+    fn parse_annotate_loc_zero() {
+        assert_eq!(parse_annotate_loc("+0+0"), Some((0.0, 0.0)));
+    }
+
+    #[test]
+    fn parse_annotate_loc_drops_negative_signs() {
+        assert_eq!(parse_annotate_loc("-100-50"), Some((100.0, 50.0)));
+    }
+
+    #[test]
+    fn parse_annotate_loc_decimal() {
+        assert_eq!(parse_annotate_loc("+10.5+20.25"), Some((10.5, 20.25)));
+    }
+
+    #[test]
+    fn parse_annotate_loc_single_component() {
+        assert_eq!(parse_annotate_loc("+100"), None);
+    }
+
+    #[test]
+    fn parse_annotate_loc_invalid() {
+        assert_eq!(parse_annotate_loc("1x2"), None);
+    }
+
+    #[test]
+    fn parse_annotate_loc_empty() {
+        assert_eq!(parse_annotate_loc(""), None);
+    }
+
+    #[test]
+    fn split_quote_even_count() {
+        assert_eq!(split_quote("a b c d", 2), "a b\nc d");
+    }
+
+    #[test]
+    fn split_quote_odd_count() {
+        assert_eq!(split_quote("a b c d e", 3), "a b c\nd e");
+    }
+
+    #[test]
+    fn split_quote_fewer_than_per_line() {
+        assert_eq!(split_quote("a b", 5), "a b");
+    }
+
+    #[test]
+    fn split_quote_exact_multiple() {
+        assert_eq!(split_quote("a b c d", 4), "a b c d");
+    }
+
+    #[test]
+    fn split_quote_single_word() {
+        assert_eq!(split_quote("hello", 1), "hello");
+    }
+
+    #[test]
+    fn split_quote_empty() {
+        assert_eq!(split_quote("", 5), "");
+    }
+
+    #[test]
+    #[should_panic(expected = "chunk size must be non-zero")]
+    fn split_quote_zero_words_per_line_panics() {
+        split_quote("a b", 0);
+    }
 }
