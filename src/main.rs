@@ -40,17 +40,15 @@ fn main() {
     let matches = cli().try_get_matches().unwrap_or_else(|error| error.exit());
 
     match matches.subcommand() {
-        Some(("create", s)) => {
-            match run_create(s) {
-                Ok(()) => println!("create wallpaper finished successfully"),
-                Err(e) => println!("failed to create wallpaper: {}", e),
-            };
-        }
+        Some(("create", s)) => match run_create(s) {
+            Ok(()) => println!("create wallpaper finished successfully"),
+            Err(e) => println!("failed to create wallpaper: {e}"),
+        },
         Some(("set", sub_matches)) => {
-            println!("not implemented: {:?}", sub_matches);
+            println!("not implemented: {sub_matches:?}");
         }
         Some(("sync", sub_matches)) => {
-            println!("not implemented: {:?}", sub_matches);
+            println!("not implemented: {sub_matches:?}");
         }
         _ => unreachable!(), // If all subcommands are defined above, anything else is unreachable!()
     }

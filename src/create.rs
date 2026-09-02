@@ -110,7 +110,7 @@ fn validate_conf(conf: &Config) -> Result<(), Error> {
     Ok(())
 }
 
-/// get_wallpaper get the path to a random, matching wallpaper for the quote
+/// get the path to a random, matching wallpaper for the quote
 fn get_wallpaper(dir: &Path, quote: &Quote) -> Result<PathBuf, Error> {
     // get file from wallpaper dir by matching quote regex
     let dir: Vec<PathBuf> = read_dir(dir)?

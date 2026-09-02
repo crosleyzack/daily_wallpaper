@@ -18,7 +18,7 @@ const DEFAULT_FONT: &str = "DejaVu-Sans";
 const DEFAULT_GRAVITY: &str = "North";
 const DEFAULT_ANNOTATE: &str = "+0+120";
 
-/// Maps a gravity string (e.g. "south", "center") to its ImageMagick enum.
+/// Maps a gravity string (e.g. "south", "center") to its `ImageMagick` enum.
 fn gravity_type(gravity: &str) -> GravityType {
     match gravity.to_ascii_lowercase().as_str() {
         "northwest" => GravityType::NorthWest,
