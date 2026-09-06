@@ -7,6 +7,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libmagickwand-dev \
         libclang-dev \
+        jq \
+        procps \
         clang \
         pkg-config \
     && rm -rf /var/lib/apt/lists/*
