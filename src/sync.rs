@@ -46,7 +46,8 @@ pub fn sync(args: &Args) -> Result<(), Error> {
         ));
     }
     // move file from temp to target
-    fs::rename(&temp_file, &args.target)?;
+    fs::copy(&temp_file, &args.target)?;
+    fs::remove_file(&temp_file)?;
     if !args.dry_run {
         fs::rename(&temp_file, &args.target)?;
     }
