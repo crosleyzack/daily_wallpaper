@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
+#[cfg(feature = "imgmagick")]
 mod create;
 mod set;
 mod sync;
@@ -15,6 +16,8 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     /// create daily wallpaper
+    #[cfg(feature = "imgmagick")]
+    #[cfg(feature = "imgmagick")]
     Create {
         /// directory of base wallpapers
         #[arg(
@@ -97,6 +100,7 @@ fn main() {
     let cli = Cli::parse();
 
     match cli.command {
+        #[cfg(feature = "imgmagick")]
         Commands::Create {
             wallpapers_dir,
             quotes_file,
