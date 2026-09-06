@@ -11,17 +11,18 @@ tasks:
     dir: "{{.TASKFILE_DIR}}"
     desc: Create New Wallpaper
     cmds:
+      - docker build -f .devcontainer/Dockerfile . -t devcontainer:latest
       - docker build . -t quote-wallpaper
-      - docker run --user 1000:1000 --mount "type=bind,source={{.TASKFILE_DIR}}/src,target=/src" --mount "type=bind,source={{.TASKFILE_DIR}}/data,target=/data" --mount "type=bind,source={{.TASKFILE_DIR}}/assets,target=/assets" quote-wallpaper
+      - docker run --userns=keep-id --mount "type=bind,source={{.TASKFILE_DIR}},target=/repo,Z" quote-wallpaper
 
   set:
     desc: Sets wallpaper
     dir: "{{.TASKFILE_DIR}}"
     cmds:
-      - ./src/set_wallpaper.sh ./assets/wallpaper.png
+      - cargo run --no-default-features set
 
   sync:
     desc: Pulls wallpaper from remote host
     dir: "{{.TASKFILE_DIR}}"
     cmds:
-      - ./src/sync_wallpaper.sh ./assets
+      - cargo run --no-default-features sync

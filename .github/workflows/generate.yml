@@ -18,16 +18,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq imagemagick procps
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
       - name: create the new wallpaper
-        run: src/create_wallpaper.sh assets data
-      - name: setup and configure gitsign
-        run: |
-          wget https://github.com/sigstore/gitsign/releases/download/v0.17.1/gitsign_0.17.1_linux_amd64.deb
-          sudo dpkg -i gitsign_0.17.1_linux_amd64.deb
-          git config --global gpg.x509.program gitsign
-          git config --global gpg.format x509
-          git config --global commit.gpgsign true
-          git config --global tag.gpgsign true
+        run: cargo run create
+      - uses: chainguard-dev/actions/setup-gitsign@v1
       - name: push new wallpaper
         env:
           GITSIGN_OIDC_MODE: ambient
