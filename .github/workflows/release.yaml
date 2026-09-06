@@ -1,27 +1,48 @@
-name: Open a release PR
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: Version to release
-        required: true
-        type: string
+  release:
+    types: [created]
 
 jobs:
-  make-release-pr:
-    permissions:
-      id-token: write # Enable OIDC
-      pull-requests: write
-      contents: write
+  release:
+    name: release ${{ matrix.target }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: x86_64-pc-windows-gnu
+            archive: zip
+            features: ""
+            artifact: wallpaper-full
+          - target: x86_64-unknown-linux-musl
+            archive: tar.gz tar.xz tar.zst
+            features: ""
+            artifact: wallpaper-full
+          - target: x86_64-apple-darwin
+            archive: zip
+            features: ""
+            artifact: wallpaper-full
+          - target: x86_64-pc-windows-gnu
+            archive: zip
+            features: "--no-default-features"
+            artifact: wallpaper-small
+          - target: x86_64-unknown-linux-musl
+            archive: tar.gz tar.xz tar.zst
+            features: "--no-default-features"
+            artifact: wallpaper-small
+          - target: x86_64-apple-darwin
+            archive: zip
+            features: "--no-default-features"
+            artifact: wallpaper-small
     steps:
-      - uses: actions/checkout@v7
-      - uses: chainguard-dev/actions/setup-gitsign@main
-      - name: Install cargo-release
-        uses: taiki-e/install-action@v2
+      - uses: actions/checkout@master
+      - name: Compile and release
+        uses: rust-build/rust-build.action@v1.4.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tool: cargo-release
-      - uses: cargo-bins/release-pr@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          version: ${{ inputs.version }}
+          RUSTTARGET: ${{ matrix.target }}
+          ARCHIVE_TYPES: ${{ matrix.archive }}
+          ARCHIVE_NAME: ${{ matrix.artifact }}
+          EXTRA_COMMAND_FLAGS: ${{ matrix.features }}
+          TOOLCHAIN_VERSION: stable
