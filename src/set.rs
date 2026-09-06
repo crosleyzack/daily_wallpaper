@@ -4,7 +4,7 @@ use std::path::PathBuf;
 #[derive(clap::ValueEnum, Clone)]
 pub enum OS {
     LinuxGnome,
-    MacOS,
+    Mac,
     Windows,
 }
 
@@ -15,8 +15,11 @@ pub struct Args {
 }
 
 /// set wallpaper to file
-pub fn set(args: Args) -> Result<(), Error> {
-    validate_args(&args)?;
+pub fn set(args: &Args) -> Result<(), Error> {
+    validate_args(args)?;
+    if args.dry_run {
+        return Ok(());
+    }
     match args.os {
         OS::LinuxGnome => {
             let uri = format!("file://{}", args.wallpaper.display());
@@ -25,20 +28,23 @@ pub fn set(args: Args) -> Result<(), Error> {
                 ("picture-uri", uri),
                 ("picture-uri-dark", uri),
                 ("picture-options", "spanned"),
-                ("show-desktop-icons", "true"),
             ] {
-                let _ = std::process::Command::new("gsettings")
+                match std::process::Command::new("gsettings")
                     .arg("set")
                     .arg("org.gnome.desktop.background")
                     .arg(name)
                     .arg(value)
-                    .status();
+                    .status()
+                {
+                    Ok(_) => {}
+                    Err(e) => print!("unable to set {name} to {value}: {e}"),
+                }
             }
         }
         OS::Windows => {
             panic!("windows not implemented")
         }
-        OS::MacOS => {
+        OS::Mac => {
             panic!("macos not implemented")
         }
     }
@@ -115,7 +121,8 @@ mod tests {
     #[test]
     fn set_ok() {
         let dir = TestDir::new();
-        assert!(set(sample_args(&dir)).is_ok());
+        let args = sample_args(&dir);
+        assert!(set(&args).is_ok());
     }
 
     #[test]
@@ -123,7 +130,7 @@ mod tests {
         let dir = TestDir::new();
         let mut args = sample_args(&dir);
         args.wallpaper = dir.path().join("does_not_exist.png");
-        let err = set(args).unwrap_err();
+        let err = set(&args).unwrap_err();
         assert_eq!(err.kind(), ErrorKind::NotFound);
         assert!(err.to_string().contains("wallpaper file does not exist"));
     }
@@ -133,7 +140,7 @@ mod tests {
         let dir = TestDir::new();
         let mut args = sample_args(&dir);
         args.wallpaper = dir.path().to_path_buf();
-        let err = set(args).unwrap_err();
+        let err = set(&args).unwrap_err();
         assert_eq!(err.kind(), ErrorKind::NotFound);
     }
 

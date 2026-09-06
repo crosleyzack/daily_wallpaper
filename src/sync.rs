@@ -12,8 +12,8 @@ pub struct Args {
 }
 
 /// pull wallpaper from remote
-pub fn sync(args: Args) -> Result<(), Error> {
-    validate_args(&args)?;
+pub fn sync(args: &Args) -> Result<(), Error> {
+    validate_args(args)?;
     // get remote wallpaper file
     let raw_url = format!(
         "https://raw.githubusercontent.com/{}/{}/{}",
@@ -35,39 +35,33 @@ pub fn sync(args: Args) -> Result<(), Error> {
     if !temp_file.exists() || !temp_file.is_file() {
         return Err(Error::new(
             ErrorKind::NotFound,
-            format!("failed to create temp file",),
+            format!("failed to create temp file: {}", temp_file.display()),
         ));
     }
     let metadata = fs::metadata(&temp_file)?;
     if metadata.len() == 0 {
         return Err(Error::new(
             ErrorKind::NotFound,
-            format!("failed to download remote wallpaper",),
+            format!("failed to download remote wallpaper: {raw_url}"),
         ));
     }
     // move file from temp to target
-    fs::rename(&temp_file, args.target)?;
+    fs::rename(&temp_file, &args.target)?;
+    if !args.dry_run {
+        fs::rename(&temp_file, &args.target)?;
+    }
     Ok(())
 }
 
 fn validate_args(args: &Args) -> Result<(), Error> {
     if args.repository.is_empty() {
-        return Err(Error::new(
-            ErrorKind::InvalidInput,
-            format!("repository is empty",),
-        ));
+        return Err(Error::new(ErrorKind::InvalidInput, "repository is empty"));
     }
     if args.branch.is_empty() {
-        return Err(Error::new(
-            ErrorKind::InvalidInput,
-            format!("branch is empty",),
-        ));
+        return Err(Error::new(ErrorKind::InvalidInput, "branch is empty"));
     }
     if args.file.is_empty() {
-        return Err(Error::new(
-            ErrorKind::InvalidInput,
-            format!("file is empty",),
-        ));
+        return Err(Error::new(ErrorKind::InvalidInput, "file is empty"));
     }
     Ok(())
 }
