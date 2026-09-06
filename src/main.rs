@@ -128,7 +128,7 @@ fn main() {
                 os,
                 dry_run,
             };
-            match set::set(args) {
+            match set::set(&args) {
                 Ok(()) => println!("set wallpaper successful"),
                 Err(e) => println!("failed to set wallpaper: {e}"),
             }
@@ -147,7 +147,7 @@ fn main() {
                 file,
                 dry_run,
             };
-            match sync::sync(args) {
+            match sync::sync(&args) {
                 Ok(()) => println!("sync wallpaper successful"),
                 Err(e) => println!("failed to sync wallpaper: {e}"),
             }
