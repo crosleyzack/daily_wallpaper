@@ -1,6 +1,7 @@
 # Daily Wallpaper
 
-[![Dependabot Updates](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates)
+[![dependabot](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates)
+[![license](https://img.shields.io/github/license/crosleyzack/daily_wallpaper?color=blue)](https://github.com/crosleyzack/daily_wallpaper/blob/main/LICENSE)
 
 Generates a daily wallpaper by pairing an image from `assets/wallpapers` and a quote from `data/quotes.json`
 
