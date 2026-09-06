@@ -62,7 +62,7 @@ enum Commands {
         wallpaper: PathBuf,
 
         /// type of system we are on
-        #[arg(long, default_value = "LinuxGnome")]
+        #[arg(long, default_value = "linux-gnome")]
         os: set::OS,
 
         /// report what would change without operating

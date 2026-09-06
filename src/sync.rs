@@ -23,7 +23,7 @@ pub fn sync(args: &Args) -> Result<(), Error> {
         .map_err(Error::other)?
         .error_for_status()
         .map_err(Error::other)?
-        .text()
+        .bytes()
         .map_err(Error::other)?;
     // write to temp directory
     let temp_file = temp_dir().join(
@@ -46,10 +46,9 @@ pub fn sync(args: &Args) -> Result<(), Error> {
         ));
     }
     // move file from temp to target
-    fs::copy(&temp_file, &args.target)?;
-    fs::remove_file(&temp_file)?;
     if !args.dry_run {
-        fs::rename(&temp_file, &args.target)?;
+        fs::copy(&temp_file, &args.target)?;
+        fs::remove_file(&temp_file)?;
     }
     Ok(())
 }
