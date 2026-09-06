@@ -1,22 +1,12 @@
 #!/bin/bash
 
-# When do you want cronjob to run each day
-HOUR=06
-MIN=00
-
 FILE_PATH=$(realpath $BASH_SOURCE)
 DIR_PATH=$(dirname $FILE_PATH)
-ASSET_DIR=$(realpath "$DIR_PATH/../assets")
-DATA_DIR=$(realpath "$DIR_PATH/../data")
-
-CREATE_EXE="$DIR_PATH/create_wallpaper.sh"
-SET_EXE="$DIR_PATH/set_wallpaper.sh"
-SYNC_EXE="$DIR_PATH/sync_wallpaper.sh"
+REPO_DIR=$(realpath "$DIR_PATH/..")
+ASSET_DIR=$(realpath "$REPO_DIR/assets")
+DATA_DIR=$(realpath "$REPO_DIR/data")
 
 # Update permissions
-chmod 755 $CREATE_EXE
-chmod 755 $SET_EXE
-chmod 755 $SYNC_EXE
 chmod 644 $DATA_DIR/quotes.json
 chmod 755 $ASSET_DIR/wallpapers
 find $ASSET_DIR/wallpapers -type f -exec chmod 644 {} \;
@@ -24,11 +14,11 @@ find $ASSET_DIR/wallpapers -type f -exec chmod 644 {} \;
 # Dumb permissions stuff
 # sudo chown $USER:$USER ~/.config/dconf -R
 chmod u+w ~/.config/dconf -R
-
 echo "updated permissions"
 
-# Command is to pull desktop from remote and set
-COMMAND="sh -c \"$SYNC_EXE $ASSET_DIR wallpaper.png && $SET_EXE $ASSET_DIR/wallpaper.png\""
+# Pull wallpaper from remote and set it, via the taskfile
+RUN="task -d $REPO_DIR"
+COMMAND="sh -c \"$RUN sync && $RUN set\""
 
 # make desktop startup file
 # https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
@@ -56,20 +46,3 @@ rm -f $APP_DIR/$DESKTOP_FILE
 ln -s $WALLPAPER_FILE $APP_DIR/$DESKTOP_FILE
 echo "Set to run at startup"
 echo "Install complete"
-
-# Setup cron
-# TODO: systemd timer as alternative?
-setup_crontab () {
-    crontab -l > CRONTAB_NEW
-    found=$( grep "$COMMAND" CRONTAB_NEW )
-    if [ -z "$found" ]
-    then
-        echo "wallpaper_cron adding cron to crontab"
-        logger "wallpaper_cron adding cron to crontab"
-        # TODO if github cron works, this should just sync
-        ENTRY="$MIN $HOUR * * * $COMMAND"
-        echo "$ENTRY" >> CRONTAB_NEW
-    fi
-    crontab CRONTAB_NEW
-    rm CRONTAB_NEW
-}
