@@ -2,6 +2,8 @@ use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
 mod create;
+mod set;
+mod sync;
 
 #[derive(Parser)]
 #[command(name = "wallpaper", about = "utility for creating daily wallpapers")]
@@ -17,21 +19,21 @@ enum Commands {
         /// directory of base wallpapers
         #[arg(
             long,
-            default_value = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/wallpapers")
+            default_value = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/wallpapers"),
         )]
         wallpapers_dir: PathBuf,
 
         /// quotes file to pull from
         #[arg(
             long,
-            default_value = concat!(env!("CARGO_MANIFEST_DIR"), "/data/quotes.json")
+            default_value = concat!(env!("CARGO_MANIFEST_DIR"), "/data/quotes.json"),
         )]
         quotes_file: PathBuf,
 
         /// where to write resulting wallpaper file
         #[arg(
             long = "name",
-            default_value = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/wallpaper.png")
+            default_value = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/wallpaper.png"),
         )]
         out_file: PathBuf,
 
@@ -48,9 +50,47 @@ enum Commands {
         dry_run: bool,
     },
     /// set the gnome desktop wallpaper
-    Set,
+    Set {
+        /// file to set as wallpaper
+        #[arg(
+            long,
+            default_value = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/wallpaper.png"),
+        )]
+        wallpaper: PathBuf,
+
+        /// type of system we are on
+        #[arg(long, default_value = "Linux")]
+        os: set::OS,
+
+        /// report what would change without operating
+        #[arg(long)]
+        dry_run: bool,
+    },
     /// fetch wallpaper from remote
-    Sync,
+    Sync {
+        /// wallpaper file to write
+        #[arg(
+            long,
+            default_value = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/wallpaper.png"),
+        )]
+        target: PathBuf,
+
+        /// repository to pull wallpapers from
+        #[arg(long, default_value = "crosleyzack/daily_wallpaper")]
+        repository: String,
+
+        /// branch to pull wallpapers from
+        #[arg(long, default_value = "main")]
+        branch: String,
+
+        /// file to pull wallpapers from
+        #[arg(long, default_value = "assets/wallpaper.png")]
+        file: String,
+
+        /// report what would change without operating
+        #[arg(long)]
+        dry_run: bool,
+    },
 }
 
 fn main() {
@@ -78,7 +118,39 @@ fn main() {
                 Err(e) => println!("failed to create wallpaper: {e}"),
             }
         }
-        Commands::Set => println!("not implemented"),
-        Commands::Sync => println!("not implemented"),
+        Commands::Set {
+            wallpaper,
+            os,
+            dry_run,
+        } => {
+            let args = set::Args {
+                wallpaper,
+                os,
+                dry_run,
+            };
+            match set::set(args) {
+                Ok(()) => println!("set wallpaper successful"),
+                Err(e) => println!("failed to set wallpaper: {e}"),
+            }
+        }
+        Commands::Sync {
+            target,
+            repository,
+            branch,
+            file,
+            dry_run,
+        } => {
+            let args = sync::Args {
+                target,
+                repository,
+                branch,
+                file,
+                dry_run,
+            };
+            match sync::sync(args) {
+                Ok(()) => println!("sync wallpaper successful"),
+                Err(e) => println!("failed to sync wallpaper: {e}"),
+            }
+        }
     }
 }
