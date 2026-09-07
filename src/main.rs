@@ -78,17 +78,12 @@ enum Commands {
         )]
         target: PathBuf,
 
-        /// repository to pull wallpapers from
-        #[arg(long, default_value = "crosleyzack/daily_wallpaper")]
-        repository: String,
-
-        /// branch to pull wallpapers from
-        #[arg(long, default_value = "main")]
-        branch: String,
-
-        /// file to pull wallpapers from
-        #[arg(long, default_value = "assets/wallpaper.png")]
-        file: String,
+        /// location to pull wallpapers from
+        #[arg(
+            long,
+            default_value = "https://raw.githubusercontent.com/crosleyzack/daily_wallpaper/main/assets/wallpaper.png"
+        )]
+        url: String,
 
         /// report what would change without operating
         #[arg(long)]
@@ -139,16 +134,12 @@ fn main() {
         }
         Commands::Sync {
             target,
-            repository,
-            branch,
-            file,
+            url,
             dry_run,
         } => {
             let args = sync::Args {
                 target,
-                repository,
-                branch,
-                file,
+                url,
                 dry_run,
             };
             match sync::sync(&args) {
