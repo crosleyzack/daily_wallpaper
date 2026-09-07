@@ -1,7 +1,9 @@
 # Daily Wallpaper
 
-[![dependabot](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates)
 [![license](https://img.shields.io/github/license/crosleyzack/daily_wallpaper?color=blue)](https://github.com/crosleyzack/daily_wallpaper/blob/main/LICENSE)
+[![release](https://img.shields.io/github/v/release/crosleyzack/daily_wallpaper?include_prereleases)](https://github.com/crosleyzack/daily_wallpaper/releases)
+[![Rust CI](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/ci.yaml/badge.svg)](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/ci.yaml)
+[![dependabot](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/crosleyzack/daily_wallpaper/actions/workflows/dependabot/dependabot-updates)
 
 Generates a daily wallpaper by pairing an image from `assets/wallpapers` and a quote from `data/quotes.json`
 
@@ -15,13 +17,14 @@ Generates a daily wallpaper by pairing an image from `assets/wallpapers` and a q
 
 `task sync` will pull todays wallpaper from the github repository. Daily wallpaper should be generated at midnight. `task set` will set the wallpaper as the background (only works as written on gnome).
 
-Run `task install` to setup pull daily wallpaper on startup and on 6am morning cron.
+Run `task install` to setup pull daily wallpaper on startup.
 
 ### Use My Own Wallpapers
 
-To use your own wallpapers and quotes, you can fork the repo change the source `src/sync_wallpaper.sh` pulls the image from.
+To use your own wallpapers and quotes, you can either:
 
-To run locally only, update `install.sh` to have cron and startup run `src/create_wallpaper.sh` rather than `src/sync_wallpaper.sh`. You can grab the code from `task create` to run this in a docker container.
+- fork the repo to change the quotes.json and wallpapers directory
+- pass in custom flags to `create` wallpaper command
 
 # Quotes Schema
 
