@@ -2,24 +2,19 @@ use std::env::temp_dir;
 use std::fs;
 use std::io::{Error, ErrorKind};
 use std::path::PathBuf;
+use url::Url;
 
 pub struct Args {
     pub target: PathBuf,
-    pub repository: String,
-    pub branch: String,
-    pub file: String,
+    pub url: String,
     pub dry_run: bool,
 }
 
 /// pull wallpaper from remote
 pub fn sync(args: &Args) -> Result<(), Error> {
-    validate_args(args)?;
+    let url = parse_args(args)?;
     // get remote wallpaper file
-    let raw_url = format!(
-        "https://raw.githubusercontent.com/{}/{}/{}",
-        args.repository, args.branch, args.file
-    );
-    let data = reqwest::blocking::get(&raw_url)
+    let data = reqwest::blocking::get(url)
         .map_err(Error::other)?
         .error_for_status()
         .map_err(Error::other)?
@@ -42,7 +37,7 @@ pub fn sync(args: &Args) -> Result<(), Error> {
     if metadata.len() == 0 {
         return Err(Error::new(
             ErrorKind::NotFound,
-            format!("failed to download remote wallpaper: {raw_url}"),
+            format!("failed to download remote wallpaper: {}", args.url),
         ));
     }
     // move file from temp to target
@@ -53,17 +48,17 @@ pub fn sync(args: &Args) -> Result<(), Error> {
     Ok(())
 }
 
-fn validate_args(args: &Args) -> Result<(), Error> {
-    if args.repository.is_empty() {
-        return Err(Error::new(ErrorKind::InvalidInput, "repository is empty"));
+fn parse_args(args: &Args) -> Result<Url, Error> {
+    if args.url.is_empty() {
+        return Err(Error::new(ErrorKind::InvalidInput, "url is empty"));
     }
-    if args.branch.is_empty() {
-        return Err(Error::new(ErrorKind::InvalidInput, "branch is empty"));
+    match Url::parse(&args.url) {
+        Ok(url) => Ok(url),
+        Err(e) => Err(Error::new(
+            ErrorKind::InvalidInput,
+            format!("url is invalid: {e}"),
+        )),
     }
-    if args.file.is_empty() {
-        return Err(Error::new(ErrorKind::InvalidInput, "file is empty"));
-    }
-    Ok(())
 }
 
 #[cfg(test)]
@@ -74,42 +69,31 @@ mod tests {
     fn sample_args() -> Args {
         Args {
             target: PathBuf::from("/tmp/wallpaper.png"),
-            repository: "crosleyzack/daily_wallpaper".to_string(),
-            branch: "main".to_string(),
-            file: "assets/quotes.json".to_string(),
+            url: "https://example.com/wallpaper.png".to_string(),
             dry_run: false,
         }
     }
 
     #[test]
-    fn validate_args_ok() {
-        assert!(validate_args(&sample_args()).is_ok());
+    fn parse_args_ok() {
+        assert!(parse_args(&sample_args()).is_ok());
     }
 
     #[test]
-    fn validate_args_empty_repository() {
+    fn parse_args_empty_url() {
         let mut args = sample_args();
-        args.repository.clear();
-        let err = validate_args(&args).unwrap_err();
+        args.url.clear();
+        let err = parse_args(&args).unwrap_err();
         assert_eq!(err.kind(), ErrorKind::InvalidInput);
-        assert_eq!(err.to_string(), "repository is empty");
+        assert_eq!(err.to_string(), "url is empty");
     }
 
     #[test]
-    fn validate_args_empty_branch() {
+    fn parse_args_invalid_url() {
         let mut args = sample_args();
-        args.branch.clear();
-        let err = validate_args(&args).unwrap_err();
+        args.url = "not a url".to_string();
+        let err = parse_args(&args).unwrap_err();
         assert_eq!(err.kind(), ErrorKind::InvalidInput);
-        assert_eq!(err.to_string(), "branch is empty");
-    }
-
-    #[test]
-    fn validate_args_empty_file() {
-        let mut args = sample_args();
-        args.file.clear();
-        let err = validate_args(&args).unwrap_err();
-        assert_eq!(err.kind(), ErrorKind::InvalidInput);
-        assert_eq!(err.to_string(), "file is empty");
+        assert!(err.to_string().starts_with("url is invalid: "));
     }
 }
