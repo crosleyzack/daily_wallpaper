@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends libmagickwand-dev libclang-dev procps clang pkg-config
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v2
       - run: cargo build
       - uses: Swatinem/rust-cache@v2
       - name: create the new wallpaper
